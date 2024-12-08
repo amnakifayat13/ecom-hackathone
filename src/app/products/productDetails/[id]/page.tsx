@@ -35,6 +35,14 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
   const relatedItems = products.filter(
     (item) => item.category === product.category && item.id !== product.id
   );
+
+  const category = "Kitchen Ware"; 
+  const filteredProducts = products.filter(
+    (product) => product.category === category
+  );
+
+  
+ 
  
   
 
@@ -164,6 +172,86 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
         
       </div>
       </div>
+
+      {/* second part of the page */}
+      <div className="mt-10 flex gap-6 md:gap-24 text-[#252B42] text-sm ">
+        <span className="md:ml-72 ">description</span>
+        <span>Additional Information </span>
+        <span>Reveiws(0)</span>
+      </div>
+      <div className="md:w-[800px] md:h-[1px] md:bg-slate-500 mt-10 md:ml-24"></div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-3 mt-10 ml-10 md:ml-24">
+        <Image src="/kw.png" alt="kw" width={300} height={400} className="h-[500px]"/>
+        <div>
+            <h2 className="text-[#252B42] md:text-xl font-semibold text-sm">The quick fox jumps over </h2>
+            <p className="text-[#252B42] text-md mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry&apos; standard dummy text ever since the 1500s, when an
+                 unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                 <p className="text-[#252B42] text-md mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry &apos;standard dummy text ever since the 1500s, when an
+                 unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                 <p className="text-[#252B42] text-md mt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry&apos; standard dummy text ever since the 1500s, when an
+                 unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        <div>
+            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2 md:ml-20 mt-2">The quick fox jumps over</h2>
+            <ul className="text-[#252B42]  md:ml-20 text-xs md:text-md mt-6">
+                <li className="mt-6"> &rarr; The quick fox jumps over </li>
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+            </ul>
+            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2 md:ml-20 mt-6">The quick fox jumps over</h2>
+            <ul className="text-[#252B42]  md:ml-20 text-xs md:text-md mt-6">
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+                <li className="mt-6">&rarr;  The quick fox jumps over</li>
+                </ul>
+        </div>
+
+        
     </div>
-  );
-}
+    <div className="md:bg-gray-200 md:w-full md:h-[1300px] mt-10">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold  pt-10 ml-4 md:ml-24 ">Besst Selling Products</h1>
+        <div className="md:w-[800px] md:h-[1px]  md:bg-slate-500 mt-10 md:ml-24"></div>
+                <div className="ml-4 md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20 ">
+                {filteredProducts.map((product) => (
+         <Link key={product.id} href={`/products/productDetails/${product.id}`}>
+                    <Image src={product.imageUrl} alt={product.name} width={200} height={200}/>
+                    <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p>
+                    <p className=" text-xs mt-2 text-[#252B42] ml-4">{product.description}</p>
+                    <div className="mt-2">
+                        <span className="text-slate-400 text-sm ml-10 font-semibold">$16.40</span>
+                        <span className="text-green-700 text-sm ml-2 font-semibold">${product.price}</span>
+                    </div>
+                    <div className="flex gap-2 ml-10 mt-2 mb-20" >
+                    <div className="w-[10px] h-[10px] rounded-full bg-blue-500"></div>
+                    <div className="w-[10px] h-[10px] rounded-full bg-red-500"></div>
+                    <div className="w-[10px] h-[10px] rounded-full bg-green-700"></div>
+                    <div className="w-[10px] h-[10px] rounded-full bg-black"></div>
+                    
+                    </div>
+                    </Link>
+                ))}
+                     {/* logo setion */}
+                <div className="flex flex-col md:flex-row md:gap-10 mt-20 md:ml-40 gap-6">
+                <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+                <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+                <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+                <Image src="/logo4.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+                <Image src="/logo5.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+                <Image src="/logo6.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
+            </div>
+
+
+                </div>
+                
+            
+                 
+            </div>
+           
+    </div>
+  )}
+ 

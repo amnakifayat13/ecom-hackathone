@@ -28,9 +28,9 @@ export default function Menu(){
                             
                         </select>
                     </div></li>
-                    <li className="text-[#252B42] mt-2"><Link href="/">About</Link></li>
+                    <li className="text-[#252B42] mt-2"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/">Blog</Link></li>
-                    <li className="text-[#252B42] mt-2"><Link href="/">Contact</Link></li>
+                    <li className="text-[#252B42] mt-2"><Link href="/contact">Contact</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/">Pages</Link></li>
                 </ul>
                 <div className=" mt-2 md:ml-36 ml- text-[#00b0d7]">

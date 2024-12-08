@@ -7,7 +7,7 @@ import Menu from "./Helper/menu"
 export default function Nav(){
     return(
 <>
-<div className="hidden md:flex justify-between items-center bg-[#252B42] text-white text-sm h-14">
+<div className="hidden md:flex justify-between items-center bg-[#252B42] text-white text-sm h-14 md:sticky md:top-0 md:z-[1]">
     <div>
         <p className="ml-[24rem]">Summer Sale for All Swim Suits And Free Express Delivery-OFF 50% </p>
     </div>
@@ -39,9 +39,9 @@ export default function Nav(){
                             
                         </select>
                     </div></li>
-                    <li className="text-[#252B42]"><Link href="/">About</Link></li>
+                    <li className="text-[#252B42]"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42]"><Link href="/">Blog</Link></li>
-                    <li className="text-[#252B42]"><Link href="/">Contact</Link></li>
+                    <li className="text-[#252B42]"><Link href="/contact">Contact</Link></li>
                     <li className="text-[#252B42]"><Link href="/">Pages</Link></li>
                 </ul>
             </div>

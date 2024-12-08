@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 export default function Section2(){
     return(
         <div className="pt-16 pb-16 bg-gray-100">
-            <h1 className=" text-center text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#252B42] font-bold">EDITOR'S PICK</h1>
+            <h1 className=" text-center text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#252B42] font-bold">EDITOR&apos; PICK</h1>
             <p className="flex justify-center text-xs md:text-lg text-[#252B42] mt-4">Problems trying to resolve the conflict between</p>
 
             <div className="flex flex-col   md:flex-row  ml-24 mt-10">

@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.image-container {
+    position: relative;
+    display: inline-block;
+   
+  }
+  
+  .image-container img {
+    display: block;
+    border-radius: 50%; /* Image ko circular banane ke liye */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Circular shadow */
+    background: rgb(238, 190, 206);
+  }
+  
