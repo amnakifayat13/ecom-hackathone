@@ -85,7 +85,7 @@ export default function About(){
             {/* video Section */}
             <div className="pt-12 pb-12 flex justify-center">
     <Image 
-        src="/video card.png" 
+        src="/videocard.png" 
         alt="Video Card" 
         width={700} 
         height={400} 
@@ -152,12 +152,12 @@ export default function About(){
             <h1 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#252B42] font-bold">
     Big Companies Are Here
 </h1>
-<p className="flex justify-center mt-4 sm:mt-6 md:mt-8 text-[#252B42] text-sm sm:text-base md:text-lg">
+<p className="flex justify-center mt-4 sm:mt-6 md:mt-8 text-[#252B42] text-sm sm:text-base md:text-lg text-center">
     Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanics
 </p>
 
 
-<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-40">
+<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-96">
     <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />

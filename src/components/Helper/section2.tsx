@@ -39,6 +39,7 @@ export default function Section2() {
         </div>
 
         {/* ACCESSORIES Section */}
+        <div>
         <div className="relative">
           <Image
             src="/ep3.png"
@@ -53,7 +54,7 @@ export default function Section2() {
         </div>
 
         {/* KIDS Section */}
-        <div className="relative">
+        <div className="relative mt-8">
           <Image
             src="/ep4.png"
             alt="ep4"
@@ -64,6 +65,7 @@ export default function Section2() {
           <Button className="absolute w-24 md:w-32 top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-black py-1 text-xs font-semibold">
             KIDS
           </Button>
+        </div>
         </div>
       </div>
     </div>
