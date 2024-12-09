@@ -204,31 +204,32 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
       </div>
       <div className="md:w-[800px] md:h-[1px] md:bg-slate-500 mt-10 md:ml-24"></div>
     
-    <div className="grid grid-cols-1 md:grid-cols-3 mt-10 ml-10 md:ml-24">
+    <div className="flex flex-wrap mt-10  gap-6">
         <Image src="/kw.png" alt="kw" width={300} height={400} className="h-[500px]"/>
         <div className="px-4 sm:px-6 md:px-12 lg:px-24 py-4">
     <h2 className="text-[#252B42] text-xl sm:text-2xl font-semibold">The quick fox jumps over</h2>
-    <p className="text-[#252B42] text-sm sm:text-base mt-2">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    <p className="text-[#252B42] text-sm sm:text-base mt-3">
+        Lorem Ipsum is simply dummy text of the  typesetting<br/> industry. Lorem Ipsum has been the industry&apos;s<br/> standard dummy text ever since the 1500s, when<br/> an unknown printer took a galley of type and <br/>scrambled it to make a type specimen book.
     </p>
-    <p className="text-[#252B42] text-sm sm:text-base mt-2">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    <p className="text-[#252B42] text-sm sm:text-base mt-3">
+        Lorem Ipsum is simply dummy text of the  typesetting<br/> industry. Lorem Ipsum has been the industry&apos;s<br/> standard dummy text ever since the 1500s, when<br/> an unknown printer took a galley of type and <br/>scrambled it to make a type specimen book.
     </p>
-    <p className="text-[#252B42] text-sm sm:text-base mt-2">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    <p className="text-[#252B42] text-sm sm:text-base mt-3">
+        Lorem Ipsum is simply dummy text of the  typesetting<br/> industry. Lorem Ipsum has been the industry&apos;s<br/> standard dummy text ever since the 1500s, when<br/> an unknown printer took a galley of type and <br/>scrambled it to make a type specimen book.
     </p>
+    
 </div>
 
         <div>
-            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2 md:ml-20 mt-2">The quick fox jumps over</h2>
-            <ul className="text-[#252B42]  md:ml-20 text-xs md:text-md mt-6">
+            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2  mt-2">The quick fox jumps over</h2>
+            <ul className="text-[#252B42]  text-xs md:text-md mt-6">
                 <li className="mt-6"> &rarr; The quick fox jumps over </li>
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
             </ul>
-            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2 md:ml-20 mt-6">The quick fox jumps over</h2>
-            <ul className="text-[#252B42]  md:ml-20 text-xs md:text-md mt-6">
+            <h2 className="text-[#252B42] md:text-xl text-sm font-semibold ml-2 -20 mt-6">The quick fox jumps over</h2>
+            <ul className="text-[#252B42]   text-xs md:text-md mt-6">
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
                 <li className="mt-6">&rarr;  The quick fox jumps over</li>
