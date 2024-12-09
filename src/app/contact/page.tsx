@@ -5,30 +5,26 @@ import Image from "next/image"
 export default function Contact(){
     return(
         <div>
-        <div className=" md:ml-0 w-full md:w-full h-[500px] bg-white flex ">
-                <div className="ml-10 md:ml-72 mt-40 text-[#252B42]">
-                    <p>CONTACT US</p>
-                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold  mt-10">Get in touch today!</h1>
-                    <p className="mt-10 ">We know how large objects will act,</p>
-                    <p>but things on a small scale</p>
-                    <p className="mt-10 font-bold">Phone: +451 215 215</p>
-                    <p className="mt-2 font-bold">Fax: +451 215 215 </p>
-                    <div className="flex gap-2 text-[#00b0d7] mt-4">
-        <Facebook  className="fill-[#00b0d7]"/>
-        <Instagram />
-        <Twitter className="fill-[#00b0d7]"/>
+        <div className="w-full h-auto bg-white flex flex-col md:flex-row py-12 md:ml-24">
+    <div className="flex flex-col md:w-1/2 px-6 md:px-20 text-[#252B42] mt-10 md:mt-0">
+        <p className="text-center md:text-left text-[#252B42] text-sm">CONTACT US</p>
+        <h1 className="text-center md:text-left text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-6">Get in touch today!</h1>
+        <p className="text-center md:text-left mt-6">We know how large objects will act,</p>
+        <p className="text-center md:text-left">but things on a small scale</p>
+        <p className="mt-6 text-center md:text-left font-bold">Phone: +451 215 215</p>
+        <p className="mt-2 text-center md:text-left font-bold">Fax: +451 215 215</p>
+        <div className="flex justify-center md:justify-start gap-4 text-[#00b0d7] mt-6">
+            <Facebook className="fill-[#00b0d7]" />
+            <Instagram />
+            <Twitter className="fill-[#00b0d7]" />
+        </div>
     </div>
-                    
-                </div >
-                <div className="w-40 h-40 rounded-full"></div>
-                <div className="image-container ">
-                    
-                <Image src="/contactpic.png" alt="" width={300} height={300}
-                className=" hidden md:block md:ml-48 md:mt-24 mt-24"/> 
-            
-                </div>
-                
-            </div>
+
+    <div className="flex justify-center md:justify-end mt-6 md:mt-0 md:w-1/2">
+        <Image src="/contactpic.png" alt="Contact" width={300} height={300} className=" md:ml-16 md:mt-8 md:mr-60" />
+    </div>
+</div>
+
 
             {/* section2 */}
             <div className="pt-12 pb-12">

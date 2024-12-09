@@ -4,126 +4,168 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 export default function About(){
     return(
         <div>
-            <div className=" md:ml-0 w-full md:w-full h-[500px] bg-white flex ">
-                <div className="ml-10 md:ml-72 mt-40 text-[#252B42]">
-                    <p>ABOUT COMPANY</p>
-                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold  mt-10">ABOUT US</h1>
-                    <p className="mt-10 ">We know how large objects will act,</p>
-                    <p>but things on a small scale</p>
-                    <Button variant={"destructive"} className="mt-6 font-bold text-white">Get Quotes Now</Button>
-                </div >
-                <div className="w-40 h-40 rounded-full"></div>
-                <div className="image-container ">
-                    
-                <Image src="/aboutpic.png" alt="" width={300} height={300}
-                className=" hidden md:block md:ml-48 md:mt-24 mt-24"/> 
-            
-                </div>
-            </div>
+            <div className="w-full h-auto md:h-[500px] bg-white flex flex-col md:flex-row items-center md:items-start">
+   
+    <div className="text-center md:text-left px-4 md:px-0 md:ml-20 lg:ml-72 mt-10 md:mt-40 text-[#252B42]">
+        <p className="text-sm md:text-base">ABOUT COMPANY</p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-6">ABOUT US</h1>
+        <p className="mt-6 text-sm md:text-base">We know how large objects will act,</p>
+        <p className="text-sm md:text-base">but things on a small scale</p>
+        <Button variant={"destructive"} className="mt-6 font-bold text-white">
+            Get Quotes Now
+        </Button>
+    </div>
+
+    
+    <div className="relative mt-10 md:mt-0">
+        <div className="hidden md:block w-40 h-40 rounded-full bg-pink-200 mx-auto md:mx-0 mt-6"></div>
+        <Image 
+            src="/aboutpic.png" 
+            alt="About Image" 
+            width={300} 
+            height={300} 
+            className="  ml-4 lg:ml-20 "
+        />
+    </div>
+</div>
+
             {/* section 2 */}
 
             <div className="pt-12 pb-12">
-                <p className="text-red-500 text-sm ml-4 md:ml-60">Problems Trying</p>
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                    <div>
-                        <p className="mt-10 text-[#252B42] text-sm font-bold md:ml-60 ml-2">Met minim Mollie non desert <br/>Alamo est sit cliquery dolor do<br/>met sent</p>
-                    </div>
-                    <div>
-                        <p className="mt-10 text-[#252B42] text-sm">Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanincs </p>
-                    </div>
-                </div>
+            <div className="px-4 md:px-20 lg:px-40">
+   
+    <p className="text-red-500 text-sm text-center md:text-left mb-4">Problems Trying</p>
+    
+   
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+      
+        <div className="text-center md:text-left">
+            <p className="mt-4 text-[#252B42] text-sm font-bold">
+                Met minim Mollie non desert <br />
+                Alamo est sit cliquery dolor do<br />
+                met sent
+            </p>
+        </div>
+        
+       
+        <div className="text-center md:text-left">
+            <p className="mt-4 text-[#252B42] text-sm">
+                Problems trying to resolve the conflict between the two major realms of <br />
+                classical physics Newtonian mechanics
+            </p>
+        </div>
+    </div>
+</div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 md:ml-24 mt-20 ml-10">
-                    <div>
-                        <p className="text-[#252B42] text-2xl font-bold ml-6">15K</p>
-                        <p className="text-[#252B42] text-sm">Happy Customers</p>
-                    </div>
 
-                    <div>
-                        <p className="text-[#252B42] text-2xl font-bold ml-4">150K</p>
-                        <p className="text-[#252B42] text-sm">Monthly Visitors</p>
-                    </div>
+<div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mt-10 px-6 md:px-24">
+   
+    <div className="text-center md:text-left">
+        <p className="text-[#252B42] text-2xl font-bold">15K</p>
+        <p className="text-[#252B42] text-sm">Happy Customers</p>
+    </div>
 
-                    <div>
-                        <p className="text-[#252B42] text-2xl font-bold ml-10">15</p>
-                        <p className="text-[#252B42] text-sm">Countries Worldwide</p>
-                    </div>
+    <div className="text-center md:text-left">
+        <p className="text-[#252B42] text-2xl font-bold">150K</p>
+        <p className="text-[#252B42] text-sm">Monthly Visitors</p>
+    </div>
 
-                    <div>
-                        <p className="text-[#252B42] text-2xl font-bold ml-4">100+</p>
-                        <p className="text-[#252B42] text-sm">Top Partners</p>
-                    </div>
-                </div>
+    <div className="text-center md:text-left">
+        <p className="text-[#252B42] text-2xl font-bold">15</p>
+        <p className="text-[#252B42] text-sm">Countries Worldwide</p>
+    </div>
+
+    <div className="text-center md:text-left">
+        <p className="text-[#252B42] text-2xl font-bold">100+</p>
+        <p className="text-[#252B42] text-sm">Top Partners</p>
+    </div>
+</div>
 
             </div>
             {/* video Section */}
-            <div className="pt-12 pb-12">
-                <Image src="/video card.png" alt="" width={300} height={300} className="w-[700px] h-[400px] md:ml-72 ml-2"/>
-            </div>
+            <div className="pt-12 pb-12 flex justify-center">
+    <Image 
+        src="/video card.png" 
+        alt="Video Card" 
+        width={700} 
+        height={400} 
+        className="w-full max-w-[700px] h-auto"
+    />
+</div>
+
             {/* our team */}
             <div className="pb-12 pt-12">
-                <h1 className="text-[#252B42] text-xl md:2xl font-bold text-center">Meet Our Team</h1>
-                <p className=" flex justify-center mt-2 text-[#252B42] text-sm">Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanincs </p>
-            </div>
-            {/* our team images */}
-            <div className="grid grid-cols-1 md:grid-cols-3">
-                <div className="md:ml-32 ml-6">
-                    <Image src="/user1.jpg" alt="" width={300} height={300}/>
-                    <div className="ml-28 mt-6">
-                    <p className="font-bold">username</p>
-                    <p>Professional </p>
-                    <div className="flex gap-2 text-[#00b0d7] ">
-            <Facebook  className="fill-[#00b0d7]"/>
-            <Instagram />
-            <Twitter className="fill-[#00b0d7]"/>
-            </div>
-                    </div>
-                    
-                </div>
-                <div>
-                    
+    <h1 className="text-[#252B42] text-xl md:text-2xl font-bold text-center">Meet Our Team</h1>
+    <p className="flex justify-center mt-2 text-[#252B42] text-sm text-center">
+        Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanics
+    </p>
+</div>
 
-                    <div className="md:ml-16 ml-6">
-                    <Image src="/user2.png" alt="" width={300} height={300}/>
-                    <div className="ml-28 mt-6">
-                    <p className="font-bold">username</p>
-                    <p>Professional </p>
-                    <div className="flex gap-2 text-[#00b0d7] ">
-            <Facebook  className="fill-[#00b0d7]"/>
-            <Instagram />
-            <Twitter className="fill-[#00b0d7]"/>
+{/* Our team images */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    {/* User 1 */}
+    <div className="flex flex-col items-center">
+        <Image src="/user1.jpg" alt="User 1" width={300} height={300} />
+        <div className="mt-6 text-center">
+            <p className="font-bold">Username</p>
+            <p>Professional</p>
+            <div className="flex justify-center gap-2 mt-2 text-[#00b0d7]">
+                <Facebook className="fill-[#00b0d7]" />
+                <Instagram />
+                <Twitter className="fill-[#00b0d7]" />
             </div>
-                    </div>
-                    </div>
+        </div>
+    </div>
 
-                   
-                    
-                </div>
-                <div>
-                    <Image src="/user3.png" alt="" width={300} height={300}/>
-                    <div className="ml-28 mt-6">
-                    <p className="font-bold">username</p>
-                    <p>Professional </p>
-                    <div className="flex gap-2 text-[#00b0d7] ">
-            <Facebook  className="fill-[#00b0d7]"/>
-            <Instagram />
-            <Twitter className="fill-[#00b0d7]"/>
+    {/* User 2 */}
+    <div className="flex flex-col items-center">
+        <Image src="/user2.png" alt="User 2" width={300} height={300} />
+        <div className="mt-6 text-center">
+            <p className="font-bold">Username</p>
+            <p>Professional</p>
+            <div className="flex justify-center gap-2 mt-2 text-[#00b0d7]">
+                <Facebook className="fill-[#00b0d7]" />
+                <Instagram />
+                <Twitter className="fill-[#00b0d7]" />
             </div>
-                    </div>
-                    </div>
+        </div>
+    </div>
+
+    {/* User 3 */}
+    <div className="flex flex-col items-center">
+        <Image src="/user3.png" alt="User 3" width={300} height={300} />
+        <div className="mt-6 text-center">
+            <p className="font-bold">Username</p>
+            <p>Professional</p>
+            <div className="flex justify-center gap-2 mt-2 text-[#00b0d7]">
+                <Facebook className="fill-[#00b0d7]" />
+                <Instagram />
+                <Twitter className="fill-[#00b0d7]" />
+            </div>
+        </div>
+
+</div>
+
             </div>
             {/* logos Section */}
             <div className="pt-12 pb-12 md:w-full md:h-[500px] md:bg-gray-200">
-                <h1 className=" text-center text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#252B42] font-bold">Big Companies Are Here</h1>
-                <p className=" flex justify-center mt-10 text-[#252B42] text-sm">Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanincs </p>
-                <div className="flex flex-col md:flex-row md:gap-10 mt-20 md:ml-40 gap-6">
-                <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-                <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-                <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-                <Image src="/logo4.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-                <Image src="/logo5.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-                <Image src="/logo6.png" alt="" width={70} height={70} className="mt-10 ml-10"/>
-            </div>
+            <h1 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-[#252B42] font-bold">
+    Big Companies Are Here
+</h1>
+<p className="flex justify-center mt-4 sm:mt-6 md:mt-8 text-[#252B42] text-sm sm:text-base md:text-lg">
+    Problems trying to resolve the conflict between the two major realms of <br/> classical physics Newtonian mechanics
+</p>
+
+
+<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-40">
+    <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+    <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+    <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+    <Image src="/logo4.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+    <Image src="/logo5.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+    <Image src="/logo6.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
+</div>
+
             </div>
             {/* last section */}
             <div className=" md:ml-0 w-full md:w-full h-[500px] bg-[#00b0d7] flex ">
