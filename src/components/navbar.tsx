@@ -32,17 +32,17 @@ export default function Nav(){
             <div>
                 <ul className="  hidden md:flex gap-10 font font-semibold cursor-pointer md:ml-48">
                     <li className="text-[#252B42]"><Link href="/">Home</Link></li>
-                    <li><div className="lg:basis-1/4 lg:text-center text-right">
+                    <li><Link href="/shop"><div className="lg:basis-1/4 lg:text-center text-right">
                         <select className="text-[#252B42]" name="" id="">
                             <option value="">Shop</option>
-                            <option value="">Visit</option>
+                         
                             
                         </select>
-                    </div></li>
+                    </div></Link></li>
                     <li className="text-[#252B42]"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42]"><Link href="/">Blog</Link></li>
                     <li className="text-[#252B42]"><Link href="/contact">Contact</Link></li>
-                    <li className="text-[#252B42]"><Link href="/">Pages</Link></li>
+                    <li className="text-[#252B42]"><Link href="/">Team</Link></li>
                 </ul>
             </div>
            

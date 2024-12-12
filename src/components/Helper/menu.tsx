@@ -24,14 +24,15 @@ export default function Menu(){
                     <li><div className="">
                         <select className="text-[#252B42] mt-2" name="" id="">
                             <option value="">Shop</option>
-                            <option value="">Visit</option>
+                         
+                         
                             
                         </select>
                     </div></li>
                     <li className="text-[#252B42] mt-2"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/">Blog</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/contact">Contact</Link></li>
-                    <li className="text-[#252B42] mt-2"><Link href="/">Pages</Link></li>
+                    <li className="text-[#252B42] mt-2"><Link href="/">Team</Link></li>
                 </ul>
                 <div className=" mt-2 md:ml-36 ml- text-[#00b0d7]">
                 <User/>
