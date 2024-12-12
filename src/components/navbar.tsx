@@ -42,7 +42,7 @@ export default function Nav(){
                     <li className="text-[#252B42]"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42]"><Link href="/">Blog</Link></li>
                     <li className="text-[#252B42]"><Link href="/contact">Contact</Link></li>
-                    <li className="text-[#252B42]"><Link href="/">Team</Link></li>
+                    <li className="text-[#252B42]"><Link href="/team">Team</Link></li>
                 </ul>
             </div>
            

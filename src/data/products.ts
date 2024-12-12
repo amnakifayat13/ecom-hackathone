@@ -223,8 +223,7 @@ interface Product {
         isAvailable: true,
         discount: 40,
       },
-
-    
+      
 
     ]
      export default products
