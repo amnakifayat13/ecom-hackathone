@@ -3,7 +3,7 @@ import Image from "next/image"
 import { Facebook, Instagram, Twitter } from "lucide-react";
 export default function About(){
     return(
-        <div>
+        <div className="md:w-[1170px] md:mx-auto">
             <div className="w-full h-auto md:h-[500px] bg-white flex flex-col md:flex-row items-center md:items-start">
    
     <div className="text-center md:text-left px-4 md:px-0 md:ml-20 lg:ml-72 mt-10 md:mt-40 text-[#252B42]">
@@ -37,7 +37,7 @@ export default function About(){
     <p className="text-red-500 text-sm text-center md:text-left mb-4">Problems Trying</p>
     
    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 md:ml-6">
       
         <div className="text-center md:text-left">
             <p className="mt-4 text-[#252B42] text-sm font-bold">
@@ -58,7 +58,7 @@ export default function About(){
 </div>
 
 
-<div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mt-10 px-6 md:px-24">
+<div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 md:ml-24 mt-10 px-6 md:px-24">
    
     <div className="text-center md:text-left">
         <p className="text-[#252B42] text-2xl font-bold">15K</p>
@@ -132,7 +132,7 @@ export default function About(){
     </div>
 
     {/* User 3 */}
-    <div className="flex flex-col items-center">
+    <div className="  flex flex-col items-center">
         <Image src="/user3.png" alt="User 3" width={300} height={300} />
         <div className="mt-6 text-center">
             <p className="font-bold">Username</p>
@@ -157,7 +157,7 @@ export default function About(){
 </p>
 
 
-<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-96">
+<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-80">
     <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />

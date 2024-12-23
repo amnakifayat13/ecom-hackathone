@@ -21,14 +21,13 @@ export default function Menu(){
   {/* <ul className="block gap-10   font font-semibold cursor-pointer "> */}
   <ul className="   md:hidden gap-10 font font-semibold cursor-pointer md:ml-48">
                     <li className="text-[#252B42] mt-2"><Link href="/">Home</Link></li>
-                    <li><div className="">
-                        <select className="text-[#252B42] mt-2" name="" id="">
+                    <li><Link href="/shop"><div className="lg:basis-1/4 lg:text-center ">
+                        <select className="text-[#252B42]" name="" id="">
                             <option value="">Shop</option>
-                         
                          
                             
                         </select>
-                    </div></li>
+                    </div></Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/about">About</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/">Blog</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/contact">Contact</Link></li>

@@ -14,7 +14,7 @@ export default function Section4(){
                     <p>but things on a small scale</p>
                     <div className="flex ">
                         <p className="mt-7 font-bold">$16.48</p>
-                        <Button variant={"destructive"} className="mt-6 font-bold ml-4">ADD TO CART</Button>
+                        <Button variant={"destructive"} className="mt-6 font-bold ml-4 bg-green-600">ADD TO CART</Button>
                     </div>
                 </div>
                 {/* right side */}

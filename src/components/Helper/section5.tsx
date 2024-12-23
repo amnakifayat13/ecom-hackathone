@@ -34,11 +34,11 @@ export default function Section5() {
           <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
             <Button
               variant={"destructive"}
-              className="font-bold text-white rounded px-6 py-2"
+              className="font-bold text-white rounded px-6 py-2 bg-green-600 hover:text-green-600"
             >
               BUY NOW
             </Button>
-            <Button className="font-bold text-green-700 border border-green-700 rounded px-6 py-2">
+            <Button className="font-bold text-green-700 border border-green-600 rounded px-6 py-2">
               READ MORE
             </Button>
           </div>

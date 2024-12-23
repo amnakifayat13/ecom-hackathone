@@ -9,7 +9,7 @@ export default function Team(){
     (team) => team.category === category
   );
     return(
-        <div>
+        <div className="md:w-[1170px] mx-auto">
             {/* section1 */}
             <p className="flex justify-center mt-10">WHAT WE DO</p>
             <h1 className="text-center text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#252B42] font-bold mt-6">Innovation tailored for you</h1>
@@ -36,7 +36,7 @@ export default function Team(){
                 </div>
                 {/* user part */}
                 <h1 className="text-center text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#252B42] font-bold mt-20">Meet Our Team</h1>
-                <div className=" md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 ">
+                <div className=" md:ml-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 ">
                 {filteredteam.map((team) => (
          <Link key={team.id} href={`/products/productDetails/${team.id}`}>
              <div className="flex flex-col items-center">

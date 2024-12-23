@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function Contact(){
     return(
-        <div>
+        <div className="md:w-[1170px] md:mx-auto">
         <div className="w-full h-auto bg-white flex flex-col md:flex-row py-12 md:ml-24">
     <div className="flex flex-col md:w-1/2 px-6 md:px-20 text-[#252B42] mt-10 md:mt-0">
         <p className="text-center md:text-left text-[#252B42] text-sm">CONTACT US</p>

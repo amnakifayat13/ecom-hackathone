@@ -7,9 +7,17 @@ import Image from "next/image";
 import products from "../../../../data/products";
 import { Button } from "@/components/ui/button";
 import {  ArrowBigRightDash, EyeIcon, Heart, ShoppingCartIcon } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../../../store/cartSlice";
 
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  // Use Product type for the product parameter
+  const addToCartHandler = (product:any) => {
+    dispatch(addItem(product)); // Add the product to cart
+  };
 
   // Function to handle increment
   const incrementQuantity = () => {
@@ -60,7 +68,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     {/* Product Details Section */}
     <div className="flex flex-col md:flex-row md:ml-60 text-[#252B42] gap-10">
         {/* Product Image */}
-        <div className="flex justify-center md:w-1/2">
+        <div className="relative flex justify-center md:w-1/2">
             <Image
                 src={product.imageUrl}
                 alt={product.name}
@@ -68,6 +76,13 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
                 height={300}
                 className="mt-10 w-full md:w-72 h-auto bg-slate-300"
             />
+             <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <button onClick={() => {
+                      addToCartHandler(product); // Pass product to handler
+                    }} className="bg-black text-white px-4 py-2 text-sm w-full hover:bg-black">
+                Add to Cart
+              </button>
+            </div>
         </div>
 
         {/* Product Information */}
@@ -164,14 +179,26 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     <div>
         <div className="ml-6 md:ml-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-20">
             {relatedItems.map((product) => (
-                <Link key={product.id} href={`/products/productDetails/${product.id}`} className="group">
+                
+                     <div key={product.id} className="relative">
+                
                     {/* Product Image */}
                     <div className="relative">
                         <Image src={product.imageUrl} alt={product.name} width={200} height={200} className="w-full h-auto"/>
+                        <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <button onClick={() => {
+                      addToCartHandler(product); // Pass product to handler
+                    }}
+               className="bg-black text-white px-4 py-2 text-sm w-full hover:bg-black">
+                Add to Cart
+              </button>
+            </div>
                     </div>
                     
+                    <Link  href={`/products/productDetails/${product.id}`} className="group">
                     {/* Product Name */}
                     <p className="text-[#252B42] font-semibold mt-4 text-center">{product.name}</p>
+                    </Link>
                     
                     {/* Product Description */}
                     <p className="text-xs mt-2 text-[#252B42] text-center">{product.description}</p>
@@ -188,7 +215,8 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
                         <div className="w-[10px] h-[10px] rounded-full bg-green-700"></div>
                         <div className="w-[10px] h-[10px] rounded-full bg-black"></div>
                     </div>
-                </Link>
+                    </div>
+                
             ))}
         </div>
     </div>
@@ -205,7 +233,17 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
       <div className="md:w-[800px] md:h-[1px] md:bg-slate-500 mt-10 md:ml-24"></div>
     
     <div className="flex flex-wrap mt-10  gap-6">
-        <Image src="/kw.png" alt="kw" width={300} height={400} className="h-[500px]"/>
+        <div className="relative">
+            <Image src="/kw.png" alt="kw" width={300} height={400} className="h-[500px]"/>
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <button 
+              onClick={() => {
+                      addToCartHandler(product); // Pass product to handler
+                    }}className="bg-black text-white px-4 py-2 text-sm w-full hover:bg-black">
+                Add to Cart
+              </button>
+            </div>
+        </div>
         <div className="px-4 sm:px-6 md:px-12 lg:px-24 py-4">
     <h2 className="text-[#252B42] text-xl sm:text-2xl font-semibold">The quick fox jumps over</h2>
     <p className="text-[#252B42] text-sm sm:text-base mt-3">
@@ -243,9 +281,22 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
         <div className="md:w-[800px] md:h-[1px]  md:bg-slate-500 mt-10 md:ml-24"></div>
                 <div className="ml-4 md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20 ">
                 {filteredProducts.map((product) => (
-         <Link key={product.id} href={`/products/productDetails/${product.id}`}>
-                    <Image src={product.imageUrl} alt={product.name} width={200} height={200}/>
-                    <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p>
+        
+              <div key={product.id} className="relative">
+                    <div className="relative">
+                        <Image src={product.imageUrl} alt={product.name} width={200} height={200}/>
+                    <div className="absolute bottom-0 left-0 right-0  opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <button 
+              onClick={() => {
+                addToCartHandler(product); // Pass product to handler
+              }} 
+              className="bg-black text-white px-4 py-2 text-sm w-[200px] hover:bg-black">
+                Add to Cart
+              </button>
+            </div>
+                    </div>
+                    <Link href={`/products/productDetails/${product.id}`}>
+                    <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p></Link>
                     <p className=" text-xs mt-2 text-[#252B42] ml-4">{product.description}</p>
                     <div className="mt-2">
                         <span className="text-slate-400 text-sm ml-10 font-semibold">$16.40</span>
@@ -258,7 +309,8 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
                     <div className="w-[10px] h-[10px] rounded-full bg-black"></div>
                     
                     </div>
-                    </Link>
+                    </div>
+                    
                 ))}
                      {/* logo setion */}
                      <div className="flex flex-col md:flex-row md:gap-10 mt-10 md:ml-40 gap-6 px-4 sm:px-6 md:px-12">

@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import {
     Carousel,
@@ -19,15 +20,23 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../store/cartSlice";
   
 
 export default function Shop (){
+  const dispatch = useDispatch();
+
+  // Use Product type for the product parameter
+  const addToCartHandler = (product:any) => {
+    dispatch(addItem(product)); // Add the product to cart
+  };
     const category = "Best Selling Products"; // Change this to the desired category
   const filteredProducts = products.filter(
     (product) => product.category === category
   );
     return(
-        <div>
+        <div className="md:w-[1170px] md:mx-auto">
             <div className="bg-gray-200 w-full h-[400px]">
                 <div className="flex justify-between">
                 <h2 className=" ml-20 md:ml-24 pt-10 text-2xl font-semibold">Shop</h2>
@@ -39,7 +48,7 @@ export default function Shop (){
                 </div>
                 <div className="ml-10">
              
-<Carousel className="ml-6 mt-10">
+<Carousel className="mr-6 mt-10">
   <CarouselContent>
     <CarouselItem className="md:basis-1/2 lg:basis-1/5">
     <Image src="/shop1.png" alt="shop1" width={200} height={200}/>
@@ -87,9 +96,22 @@ export default function Shop (){
             <div>
                 <div className="ml-20 md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20">
                 {filteredProducts.map((product) => (
-         <Link key={product.id} href={`/products/productDetails/${product.id}`}>
-                    <Image src={product.imageUrl} alt={product.name} width={200} height={200}/>
-                    <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p>
+         
+                     <div key={product.id} className="relative">
+                    <div className="relative">
+                      <Image src={product.imageUrl} alt={product.name} width={200} height={200}/>
+                    <div className="absolute bottom-0 left-0 right-0  opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <button 
+              onClick={() => {
+                addToCartHandler(product); // Pass product to handler
+              }}
+              className="bg-black text-white px-4 py-2 text-sm w-[200px] hover:bg-black">
+                Add to Cart
+              </button>
+            </div>
+                    </div>
+                    <Link  href={`/products/productDetails/${product.id}`}>
+                    <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p></Link>
                     <p className=" text-xs mt-2 text-[#252B42] ml-4">{product.description}</p>
                     <div className="mt-2">
                         <span className="text-slate-400 text-sm ml-10 font-semibold">$16.40</span>
@@ -102,7 +124,8 @@ export default function Shop (){
                     <div className="w-[10px] h-[10px] rounded-full bg-black"></div>
                     
                     </div>
-                    </Link>
+                    </div>
+                    
                 ))}
 
                 </div>
@@ -133,7 +156,7 @@ export default function Shop (){
 
 {/* logo section */}
 
-<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-96 mb-10">
+<div className="flex flex-col md:flex-row md:gap-10 gap-6 mt-20 md:ml-80 mb-10">
     <Image src="/logo1.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo2.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
     <Image src="/logo3.png" alt="" width={70} height={70} className="mt-10 mx-auto md:mx-0" />
