@@ -35,7 +35,7 @@ export default function Cart (){
     }
 
     // rempve item
-    const removeItemHandler = (id:number) => {
+    const removeItemHandler = (id:string) => {
         dispatch(removeItem({id}))
     }
 
