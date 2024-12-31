@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { client } from '@/sanity/lib/client'; // Your sanity client
 import { urlFor } from '@/sanity/lib/image'; // Your image url helper
 import { useDispatch } from 'react-redux';
-import { addItem, syncSanityProducts } from '../../../store/cartSlice';
+import { addItem, loadCartFromLocalStorage, syncSanityProducts } from '../../../store/cartSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -49,6 +49,11 @@ export default function Section3() {
     
     fetchProducts();
   }, [category]);
+
+  // Load the cart from localStorage when the component mounts
+  useEffect(() => {
+    dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+  }, [dispatch]);
 
   // Add to Cart Handler
   const addToCartHandler = (product: Product) => {

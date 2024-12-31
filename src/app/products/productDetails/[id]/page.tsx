@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowBigRightDash } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../../../../store/cartSlice";
+import { addItem, loadCartFromLocalStorage } from "../../../../../store/cartSlice";
 import { client } from '../../../../sanity/lib/client'; // Assuming you have the sanity client setup
 import { urlFor } from "@/sanity/lib/image"; // Your image URL function
 
@@ -80,6 +80,10 @@ export default function ProductDetail() {
 
     fetchProduct();
   }, [id]);
+  // Load the cart from localStorage when the component mounts
+  useEffect(() => {
+    dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+  }, [dispatch]);
 
 
     
@@ -88,6 +92,7 @@ export default function ProductDetail() {
   if (!product) {
     return <p>Product not found.</p>;
   }
+  
 
   // Add to Cart Handler
     const addToCartHandler = (product: Product) => {
