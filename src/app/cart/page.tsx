@@ -1,11 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { addItem, CartItem, removeItem } from "../../../store/cartSlice"
+import { addItem, CartItem, loadCartFromLocalStorage, removeItem } from "../../../store/cartSlice"
 import { RootState } from "../../../store/store"
 import Image from "next/image"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 
 export default function Cart (){
     const dispatch = useDispatch();
@@ -38,6 +39,11 @@ export default function Cart (){
     const removeItemHandler = (id:string) => {
         dispatch(removeItem({id}))
     }
+    // Load the cart from localStorage when the component mounts
+      useEffect(() => {
+        dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+      }, [dispatch]);
+    
 
     return(
         <div className="mt-8 min-h-auto md:w-[1170px] md:mx-auto">
