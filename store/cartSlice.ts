@@ -41,15 +41,19 @@ const cartSlice = createSlice({
     },
 
     // Action to remove an item from the cart
-    removeItem(state, action: PayloadAction<{ id: string }>) {
-      // Filter out the item to be removed
-      state.items = state.items.filter(item => item.id !== action.payload.id);
-      
-      // Sync the cart to localStorage after modification
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('cart', JSON.stringify(state.items));
+    removeItem:(state, action:PayloadAction<{ id: string }>) =>{
+      const existingItem = state.items.find((item)=>item.id===action.payload.id);
+      if(existingItem){
+          if(existingItem.quantity > 1 ){
+              existingItem.quantity -= 1;
+          }else{
+              state.items =state.items.filter((item)=> item.id != action.payload.id)
+          }
       }
-    },
+  },
+  clearCart: (state) =>{
+      state.items = [];
+  },
 
     // Action to update the quantity of an item
     updateQuantity(state, action: PayloadAction<{ id: string; quantity: number }>) {
@@ -75,7 +79,7 @@ const cartSlice = createSlice({
       }
     },
 
-    // Action to load cart from localStorage (only runs on the client side)
+    // Action to load cart from localStorage 
     loadCartFromLocalStorage(state) {
       if (typeof window !== 'undefined') {
         const cartData = localStorage.getItem('cart');

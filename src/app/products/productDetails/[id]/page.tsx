@@ -34,6 +34,7 @@ interface Product {
   slug: {
     current: string;
   };
+  stockQuantity:number;
 }
 
 
@@ -54,12 +55,12 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       // Fetch the current product details
-      const query = `*[_type == "product" && _id == $id][0] {_id, title, description, price, image, slug, category}`;
+      const query = `*[_type == "product" && _id == $id][0] {_id, title, description, price, image, slug, category, stockQuantity}`;
       const params = { id };
       const data = await client.fetch(query, params);
       setProduct(data);
 
-      const result = await client.fetch('*[_type == "product" && category._ref == $category]{_id, title, description, price, image, slug,category->{name}}' , {category:category});
+      const result = await client.fetch('*[_type == "product" && category._ref == $category]{_id, title, description, price, image, slug, stockQuantity, category->{name}}' , {category:category});
       
       console.log(result);  // Log result to verify the structure of the fetched data
       setProducts(result);
@@ -69,7 +70,7 @@ export default function ProductDetail() {
       // If the product has a category, fetch related products based on the same category
       if (data?.category?._ref) {
         // Fetch related products
-        const relatedQuery = `*[_type == "product" && category._ref == $categoryRef && _id != $id] {_id, title, image, price, slug,category}`;
+        const relatedQuery = `*[_type == "product" && category._ref == $categoryRef && _id != $id] {_id, title, image, price, slug,category, stockQuantity}`;
         const relatedData = await client.fetch(relatedQuery, { categoryRef: data.category._ref, id });
         setRelatedProducts(relatedData);
 
@@ -95,21 +96,57 @@ export default function ProductDetail() {
   
 
   // Add to Cart Handler
-    const addToCartHandler = (product: Product) => {
-      const cartItem: CartItem = {
-        id: product._id, 
-        name: product.title, 
-        price: product.price, 
-        imageUrl: urlFor(product.image).url(), // Use the Sanity image URL helper
-        quantity: 1, // Default quantity
-        category:product.title
-      };
-      
-      dispatch(addItem(cartItem));  // Dispatch to Redux to add item to cart
+const addToCartHandler = async (product: Product) => {
+  if (product.stockQuantity > 0) {
+    const cartItem: CartItem = {
+      id: product._id,
+      name: product.title,
+      price: product.price,
+      imageUrl: urlFor(product.image).url(),
+      quantity: 1,
+      category: product.title,
     };
 
+    // Dispatch action to add item to cart
+    dispatch(addItem(cartItem));
+
+    // Update stock quantity in Sanity 
+    const updatedProduct = {
+      ...product,
+      stockQuantity: product.stockQuantity - 1, 
+    };
+
+    try {
+      
+      await client
+        .patch(product._id)
+        .set({ stockQuantity: updatedProduct.stockQuantity }) 
+        .commit(); 
+
+  
+      const updatedProductData = await client.fetch(
+        `*[_type == "product" && _id == $id][0]`,
+        { id: product._id }
+      );
+      
+    
+      setProduct(updatedProductData);
+    } catch (error) {
+      console.error( error);
+      alert("There was an error updating the stock. Please try again.");
+    }
+  } else {
+    alert("Sorry, this product is out of stock.");
+  }
+};
   // Handle quantity change
-  const incrementQuantity = () => setQuantity((prev) => prev + 1);
+  const incrementQuantity = () => {
+    if(quantity=== product.stockQuantity){
+    alert("oops! no item available")}
+    else{
+      setQuantity ((prev) => prev + 1)
+    }
+    };
   const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   return (
@@ -145,10 +182,11 @@ export default function ProductDetail() {
             <h1 className="text-2xl font-bold mt-10">{product.title}</h1>
             <p className="text-lg mt-4">Price: ${product.price}</p>
             <p className="mt-4">{product.description}</p>
+            <p className=""> Available Stock: {product.stockQuantity}</p>
 
             {/* Quantity Selector and Action Buttons */}
             <div className="flex items-center mt-10">
-              <button onClick={decrementQuantity} className="w-8 h-8 bg-gray-200 text-gray-700 font-bold shadow hover:bg-green-500 hover:text-white">
+              <button onClick={decrementQuantity}  className="w-8 h-8 bg-gray-200 text-gray-700 font-bold shadow hover:bg-green-500 hover:text-white">
                 -
               </button>
               <div className="flex justify-center items-center w-20 h-8 bg-gray-100 text-gray-800 font-semibold rounded-md border border-gray-300 mx-4">
@@ -207,6 +245,10 @@ export default function ProductDetail() {
                     {/* Product Price */}
                     <div className="mt-2 text-center">
                         <span className="text-slate-400 text-sm font-semibold">${relatedItem.price}</span>
+                    </div>
+                    {/* stock availbility */}
+                    <div className="mt-2 text-center">
+                        <span className="text-slate-400 text-sm font-semibold">Available Stock: {relatedItem.stockQuantity}</span>
                     </div>
 
                     {/* Product Color Options */}

@@ -1,11 +1,11 @@
-"use client"
-import { useState, useEffect } from 'react';
-import { client } from '@/sanity/lib/client'; // Your sanity client
-import { urlFor } from '@/sanity/lib/image'; // Your image url helper
-import { useDispatch } from 'react-redux';
-import { addItem, loadCartFromLocalStorage, syncSanityProducts } from '../../../store/cartSlice';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import { useState, useEffect } from "react";
+import { client } from "@/sanity/lib/client"; // Your sanity client
+import { urlFor } from "@/sanity/lib/image"; // Your image url helper
+import { useDispatch } from "react-redux";
+import { addItem, loadCartFromLocalStorage } from "../../../store/cartSlice";
+import Image from "next/image";
+import Link from "next/link";
 
 // Define the Product type (Sanity Product)
 interface Product {
@@ -21,6 +21,7 @@ interface Product {
   slug: {
     current: string;
   };
+  stockQuantity: number;
 }
 
 // Cart item type as expected by the cartSlice
@@ -31,7 +32,6 @@ interface CartItem {
   imageUrl: string;
   quantity: number;
   category: string;
- 
 }
 
 export default function Section3() {
@@ -42,11 +42,14 @@ export default function Section3() {
   // Fetch products from Sanity
   useEffect(() => {
     const fetchProducts = async () => {
-      const result = await client.fetch('*[_type == "product" && category._ref == $category]{_id, title, description, price, image, slug, category->{name}}', { category });
-      console.log(result);  // Log result to verify the structure of the fetched data
+      const result = await client.fetch(
+        '*[_type == "product" && category._ref == $category]{_id, title, description, price, image, slug, stockQuantity, category->{name}}',
+        { category }
+      );
+      console.log(result); // Log result to verify the structure of the fetched data
       setProducts(result);
     };
-    
+
     fetchProducts();
   }, [category]);
 
@@ -55,19 +58,48 @@ export default function Section3() {
     dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
   }, [dispatch]);
 
+  // Load product stock from localStorage
+  useEffect(() => {
+    const savedProducts = localStorage.getItem("products");
+    if (savedProducts) {
+      setProducts(JSON.parse(savedProducts));
+    }
+  }, []);
+
+  // Save product stock to localStorage
+  const saveToLocalStorage = (updatedProducts: Product[]) => {
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+  };
+
   // Add to Cart Handler
   const addToCartHandler = (product: Product) => {
-    const cartItem: CartItem = {
-      id: product._id, 
-      name: product.title, 
-      price: product.price, 
-      imageUrl: urlFor(product.image).url(), // Use the Sanity image URL helper
-      quantity: 1, // Default quantity
-      category:product.title
-    };
-    
-    dispatch(addItem(cartItem));  // Dispatch to Redux to add item to cart
+   
+    if (product.stockQuantity > 0) {
+      const cartItem: CartItem = {
+        id: product._id,
+        name: product.title,
+        price: product.price,
+        imageUrl: urlFor(product.image).url(), 
+        quantity: 1, 
+        category: product.title,
+      };
+
+      dispatch(addItem(cartItem)); 
+
+      // Update the stock quantity in the UI after adding to cart
+      const updatedProducts = products.map((prod) =>
+        prod._id === product._id
+          ? { ...prod, stockQuantity: prod.stockQuantity - 1 }
+          : prod
+      );
+      setProducts(updatedProducts);
+      saveToLocalStorage(updatedProducts)
+    } else {
+      alert("Sorry, this product is out of stock.");
+    }
   };
+
+  
 
   return (
     <div className="pb-16 pt-16">
@@ -88,8 +120,8 @@ export default function Section3() {
               <div className="relative">
                 {/* Product Image */}
                 <Image
-                  src={urlFor(product.image).url()}  // Correctly fetch image URL using urlFor
-                  alt={product.title}                // Use product title for alt text
+                  src={urlFor(product.image).url()}
+                  alt={product.title}
                   width={200}
                   height={200}
                 />
@@ -126,6 +158,9 @@ export default function Section3() {
                   ${product.price} {/* Display actual product price */}
                 </span>
               </div>
+
+              {/* Stock Availability */}
+              <div>Available Stock: {product.stockQuantity}</div>
 
               {/* Product Color Options (Optional) */}
               <div className="flex gap-2 ml-[52px] mt-2 mb-20">
