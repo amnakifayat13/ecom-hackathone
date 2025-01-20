@@ -20,7 +20,6 @@ export const product = defineType({
         {
             name: "productImage",
             type: "image",
-            validation: (rule) => rule.required(),
             title: "Product Image"
         },
         {

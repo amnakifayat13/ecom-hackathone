@@ -31,9 +31,9 @@ export default function Cart (){
 
    
     // add item
-    const addItemHandler = (item:CartItem) => {
-        dispatch(addItem(item))
-    }
+    // const addItemHandler = (item:CartItem) => {
+    //     dispatch(addItem(item))
+    // }
 
     // rempve item
     const removeItemHandler = (id:string) => {
@@ -76,13 +76,15 @@ export default function Cart (){
                                                 <Image src={item.imageUrl} alt={item.name} width={180} height={180}/>
                                             </div>
                                             <div>
+                                            <Link href={`/products/productDetails/${item.id}`}>
                                                 <h1 className="md:text-xl text-base font-bold text-black">{item.name}</h1>
+                                                </Link>
                                                 <h1 className="md:text-lg text-sm font-semibold">Category: {item.category}</h1>
                                                 <h1 className="md:text-2xl text-lg font-bold text-blue-950">${item.price}</h1>
                                                 <h1 className="md:text-lg text-sm font-semibold">Quantity: {item.quantity}</h1>
                                                 <div className="flex items-center mt-4 space-x-2">
-                                                    <Button onClick={()=>{addItemHandler(item)}} className="bg-green-700 text-white hover:text-green-700      "
-                                                    >Add More</Button>
+                                                    {/* <Button onClick={()=>{addItemHandler(item)}} className="bg-green-700 text-white hover:text-green-700      "
+                                                    >Add More</Button> */}
                                                     <Button onClick={() => {removeItemHandler(item.id)}} className="text-green-700"
                                                     >Remove</Button>
                                                 </div>
@@ -120,9 +122,11 @@ export default function Cart (){
                                 <span>Total</span>
                                 <span>${totalPriceWithVat}</span>
                             </div>
+                            <Link href="/order">
                             <button className="w-full bg-yellow-600 py-3 px-4 rounded-[20px] text-center text-xl font-bold text-slate-800">
                             CheckOut
                         </button>
+                            </Link>
                             
                         </div>
                        

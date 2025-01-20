@@ -13,7 +13,7 @@ export default function CartSideBar({ items }: Props) {
   const dispatch = useDispatch();
 
   // Add item to cart
-  const addCartHandler = (item: CartItem) => dispatch(addItem(item));
+  // const addCartHandler = (item: CartItem) => dispatch(addItem(item));
 
   // Remove item from cart
   const removeCartHandler = (id: string) => dispatch(removeItem({ id }));
@@ -69,13 +69,13 @@ export default function CartSideBar({ items }: Props) {
                     Remove
                   </Button>
 
-                  <Button
+                  {/* <Button
                     onClick={() => addCartHandler(item)}
                     size={"sm"}
                     className="text-green-700"
                   >
                     Add
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </div>

@@ -112,7 +112,6 @@ export default function Shop (){
                     </div>
                     <Link  href={`/products/productDetails/${product.id}`}>
                     <p className="text-[#252B42] font-semibold mt-4 ml-10">{product.name}</p></Link>
-                    <p className=" text-xs mt-2 text-[#252B42] ml-4">{product.description}</p>
                     <div className="mt-2">
                         <span className="text-slate-400 text-sm ml-10 font-semibold">$16.40</span>
                         <span className="text-green-700 text-sm ml-2 font-semibold">${product.price}</span>

@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/cart/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/cart/page.jsx", "src/app/order"],
   "exclude": ["node_modules"]
 }

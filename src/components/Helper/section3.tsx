@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { client } from "@/sanity/lib/client"; // Your sanity client
-import { urlFor } from "@/sanity/lib/image"; // Your image url helper
+import { client } from "@/sanity/lib/client"; 
+import { urlFor } from "@/sanity/lib/image"; 
 import { useDispatch } from "react-redux";
 import { addItem, loadCartFromLocalStorage } from "../../../store/cartSlice";
 import Image from "next/image";
@@ -13,7 +13,7 @@ interface Product {
   title: string;
   description: string;
   price: number;
-  image: {
+  productImage: {
     asset: {
       _ref: string;
     };
@@ -36,14 +36,14 @@ interface CartItem {
 
 export default function Section3() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [category, setCategory] = useState("a3081a71-d256-45ba-b16e-61b97cddb3ad");
+  const [category, setCategory] = useState("Best Selling Products");
   const dispatch = useDispatch();
 
   // Fetch products from Sanity
   useEffect(() => {
     const fetchProducts = async () => {
       const result = await client.fetch(
-        '*[_type == "product" && category._ref == $category]{_id, title, description, price, image, slug, stockQuantity, category->{name}}',
+        '*[_type == "product" && category->name == $category ]{_id, title, description, price, productImage, slug, stockQuantity, category->{name}, isNew}',
         { category }
       );
       console.log(result); // Log result to verify the structure of the fetched data
@@ -73,18 +73,19 @@ export default function Section3() {
 
   // Add to Cart Handler
   const addToCartHandler = (product: Product) => {
-   
     if (product.stockQuantity > 0) {
+      const imageUrl = product.productImage ? urlFor(product.productImage).url() : '/fallback-image.png'; // Fallback image if URL is not valid
+
       const cartItem: CartItem = {
         id: product._id,
         name: product.title,
         price: product.price,
-        imageUrl: urlFor(product.image).url(), 
+        imageUrl,
         quantity: 1, 
         category: product.title,
       };
 
-      dispatch(addItem(cartItem)); 
+      dispatch(addItem(cartItem));
 
       // Update the stock quantity in the UI after adding to cart
       const updatedProducts = products.map((prod) =>
@@ -93,13 +94,11 @@ export default function Section3() {
           : prod
       );
       setProducts(updatedProducts);
-      saveToLocalStorage(updatedProducts)
+      saveToLocalStorage(updatedProducts);
     } else {
       alert("Sorry, this product is out of stock.");
     }
   };
-
-  
 
   return (
     <div className="pb-16 pt-16">
@@ -114,56 +113,49 @@ export default function Section3() {
       </p>
 
       <div>
-        <div className="ml-20 md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20">
+        <div className="ml-20 md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
           {products.map((product) => (
-            <div key={product._id} className="relative">
-              <div className="relative">
+            <div key={product._id} className="relative p-4 border rounded-lg shadow-lg bg-white">
+              <div className="relative w-full h-60"> 
                 {/* Product Image */}
                 <Image
-                  src={urlFor(product.image).url()}
+                  src={product.productImage ? urlFor(product.productImage).url() : '/fallback-image.png'}
                   alt={product.title}
-                  width={200}
-                  height={200}
+                  layout="fill" 
+                  objectFit="cover" 
+                  className="rounded-md" 
                 />
 
                 {/* Add to Cart Button */}
-                <div className="absolute bottom-0 left-0 right-0 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute bottom-0 left-0 right-0 opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
-                    className="bg-black text-white px-4 py-2 text-sm w-[200px] hover:bg-black"
+                    className="bg-black text-white px-4 py-2 text-sm w-full hover:bg-black"
                     onClick={() => addToCartHandler(product)} // Add the product to the cart
                   >
                     Add to Cart
                   </button>
-                </div>
+                </div> */}
               </div>
 
               {/* Product Name */}
               <Link href={`/products/productDetails/${product._id}`}>
-                <p className="text-[#252B42] font-semibold mt-4 ml-2">
+                <p className="text-[#252B42] font-semibold mt-4 text-center">
                   {product.title} {/* Display product title */}
                 </p>
               </Link>
 
-              {/* Product Description */}
-              <p className="text-xs mt-2 text-[#252B42] ml-8">
-                {product.description} {/* Display product description */}
-              </p>
-
               {/* Price */}
-              <div className="mt-2">
-                <span className="text-slate-400 text-sm ml-10 font-semibold">
-                  $16.40 {/* You can modify this if you want to show a default price */}
-                </span>
-                <span className="text-green-700 text-sm ml-2 font-semibold">
+              <div className="mt-2 text-center">
+                <span className="text-slate-400 text-sm font-semibold">
                   ${product.price} {/* Display actual product price */}
                 </span>
               </div>
 
               {/* Stock Availability */}
-              <div>Available Stock: {product.stockQuantity}</div>
+              <div className="mt-2 text-center">Available Stock: {product.stockQuantity}</div>
 
               {/* Product Color Options (Optional) */}
-              <div className="flex gap-2 ml-[52px] mt-2 mb-20">
+              <div className="flex justify-center gap-2 mt-2 mb-4">
                 {/* You can replace these with actual color options from Sanity */}
                 <div className="w-[10px] h-[10px] rounded-full bg-blue-500"></div>
                 <div className="w-[10px] h-[10px] rounded-full bg-red-500"></div>

@@ -30,6 +30,7 @@
     "react-redux": "^9.2.0",
     "run": "^1.5.0",
     "sanity": "^3.68.3",
+    "shipengine": "^1.0.7",
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
