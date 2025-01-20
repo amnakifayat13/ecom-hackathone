@@ -6,15 +6,15 @@ export default function Section1(){
         <div>
 
             <div className=" md:ml-0 w-full md:w-full h-[500px] bg-[#00b0d7] flex ">
-                <div className="ml-10 md:ml-72 mt-40 text-white">
+                <div className="ml-10 md:ml-40 mt-40 text-white">
                     <p>SUMMER 2024</p>
                     <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold  mt-10">NEW COLLECTION</h1>
                     <p className="mt-10 ">We know how large objects will act,</p>
                     <p>but things on a small scale</p>
                     <Button variant={"destructive"} className="mt-6 font-bold bg-green-600">SHOP NOW</Button>
                 </div>
-                <Image src="/section1img.jpg" alt="" width={400} height={400}
-                className="w-[600px] hidden md:block"/> 
+                <Image src="/frontimg.png" alt="" width={400} height={400}
+                className="w-[600px] hidden md:block ml-20"/> 
             
             </div>
         </div>

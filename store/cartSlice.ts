@@ -8,6 +8,7 @@ export type CartItem = {
   imageUrl: string;
   quantity: number;
   category: string;
+  
 };
 
 // Initial state type

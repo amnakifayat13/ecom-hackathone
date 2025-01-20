@@ -71,7 +71,7 @@ export default function OrderSummary() {
       {/* Order Confirmation */}
       <div className="flex justify-center">
         <Button
-          onClick={() => router.push("/shipping")}
+          onClick={() => router.push("/shipment")}
           className="bg-green-600 text-white hover:bg-green-700 w-full py-3 mt-6 rounded-lg shadow-md"
         >
           Confirm Order
