@@ -1,7 +1,19 @@
+"use client"
 import { Button } from "@/components/ui/button"
+import {useEffect} from "react"
 import Image from "next/image"
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { loadCartFromLocalStorage } from "../../../store/cartSlice";
+
+
 export default function About(){
+    const dispatch = useDispatch();
+    // Load the cart from localStorage when the component mounts
+          useEffect(() => {
+            dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+          }, [dispatch]);
+        
     return(
         <div className="md:w-[1170px] md:mx-auto">
             <div className="w-full h-auto md:h-[500px] bg-white flex flex-col md:flex-row items-center md:items-start">
@@ -82,16 +94,19 @@ export default function About(){
 </div>
 
             </div>
-            {/* video Section */}
-            <div className="pt-12 pb-12 flex justify-center">
-    <Image 
-        src="/videocard.png" 
-        alt="Video Card" 
-        width={700} 
-        height={400} 
-        className="w-full max-w-[700px] h-auto"
-    />
+           {/* video Section */}
+<div className="pt-12 pb-12 flex justify-center items-stretchcenter ">
+  <video 
+    width="700" 
+    height="400" 
+    controls 
+    className="w-full max-w-[680px] h-auto overflow-hidden"
+  >
+    <source src="/video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 </div>
+
 
             {/* our team */}
             <div className="pb-12 pt-12">
@@ -105,7 +120,7 @@ export default function About(){
 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
     {/* User 1 */}
     <div className="flex flex-col items-center">
-        <Image src="/user1.jpg" alt="User 1" width={300} height={300} />
+        <Image src="/user1.jpg" alt="User 1" width={290} height={300} className="mr-4" />
         <div className="mt-6 text-center">
             <p className="font-bold">Username</p>
             <p>Professional</p>
@@ -133,7 +148,7 @@ export default function About(){
 
     {/* User 3 */}
     <div className="  flex flex-col items-center">
-        <Image src="/user3.png" alt="User 3" width={300} height={300} />
+        <Image src="/user3.png" alt="User 3" width={290} height={300} className="mr-4"/>
         <div className="mt-6 text-center">
             <p className="font-bold">Username</p>
             <p>Professional</p>

@@ -208,7 +208,7 @@ const addToCartHandler = async (product: Product) => {
         <h2 className="text-green-500 mt-2 font-semibold md:ml-2 text-2xl">Related Item</h2>
     </div>
 {/* Product Grid Section */}
-<div className="ml-6 mr-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-20">
+<div className="ml-6 mr-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-20">
   {relatedProducts.length === 0 ? (
     <p>No related products found</p>
   ) : (

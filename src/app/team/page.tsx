@@ -1,9 +1,18 @@
+"use client"
 import teams from "@/data/team";
 import { ArrowBigRightDash, Facebook, FacebookIcon, Instagram, InstagramIcon, Linkedin, Twitter, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {useEffect} from "react"
+import { useDispatch } from "react-redux";
+import { loadCartFromLocalStorage } from "../../../store/cartSlice";
 
 export default function Team(){
+    const dispatch = useDispatch();
+    // Load the cart from localStorage when the component mounts
+              useEffect(() => {
+                dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+              }, [dispatch]);
     const category = "Team"; // Change this to the desired category
   const filteredteam = teams.filter(
     (team) => team.category === category
