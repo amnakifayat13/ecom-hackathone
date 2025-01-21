@@ -85,7 +85,7 @@ export default function Shop() {
                 </CarouselItem>
               ))
             ) : (
-              <div>Loading carousel...</div>
+              <div>Loading ...</div>
             )}
           </CarouselContent>
         </Carousel>
@@ -115,7 +115,7 @@ export default function Shop() {
 
       {/* 3rd part */}
       <div className="pb-16 pt-16">
-  <div className="ml-20 md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20 gap-6">
+  <div className=" md:ml-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-20 gap-6">
     {carouselItems.map((product) => (
       <div
         key={product._id}
