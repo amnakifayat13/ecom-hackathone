@@ -30,10 +30,10 @@ export default function Cart (){
     // get authenticate user
 
    
-    // add item
-    // const addItemHandler = (item:CartItem) => {
-    //     dispatch(addItem(item))
-    // }
+    //add item
+    const addItemHandler = (item:CartItem) => {
+        dispatch(addItem(item))
+    }
 
     // rempve item
     const removeItemHandler = (id:string) => {
@@ -43,6 +43,8 @@ export default function Cart (){
       useEffect(() => {
         dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
       }, [dispatch]);
+      
+      
     
 
     return(

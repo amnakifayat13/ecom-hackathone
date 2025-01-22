@@ -7,9 +7,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowBigRightDash } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { addItem, loadCartFromLocalStorage } from "../../../../../store/cartSlice";
-import { client } from '../../../../sanity/lib/client'; // Assuming you have the sanity client setup
-import { urlFor } from "@/sanity/lib/image"; // Your image URL function
+import { addItem, loadCartFromLocalStorage, removeItem } from "../../../../../store/cartSlice";
+import { client } from '../../../../sanity/lib/client'; 
+import { urlFor } from "@/sanity/lib/image"; 
 
 interface CartItem {
   id: string;
@@ -21,7 +21,7 @@ interface CartItem {
  
 }
 // Define the Product type
-interface Product {
+export interface Product {
   _id: string;
   title: string;
   description: string;
@@ -113,32 +113,58 @@ const addToCartHandler = async (product: Product) => {
     // Update stock quantity in Sanity 
     const updatedProduct = {
       ...product,
-      stockQuantity: product.stockQuantity - 1, 
+      stockQuantity: product.stockQuantity - 1, // Decrease stock
     };
 
     try {
-      
+      // Update the stock in Sanity
       await client
         .patch(product._id)
-        .set({ stockQuantity: updatedProduct.stockQuantity }) 
-        .commit(); 
+        .set({ stockQuantity: updatedProduct.stockQuantity })
+        .commit();
 
-  
       const updatedProductData = await client.fetch(
         `*[_type == "product" && _id == $id][0]`,
         { id: product._id }
       );
-      
-    
-      setProduct(updatedProductData);
+      setProduct(updatedProductData); // Update product state with new stock quantity
     } catch (error) {
-      console.error( error);
+      console.error(error);
       alert("There was an error updating the stock. Please try again.");
     }
   } else {
     alert("Sorry, this product is out of stock.");
   }
 };
+// Remove from Cart Handler
+ const removeFromCartHandler = async (product: Product) =>  {
+  // Dispatch action to remove item from the Redux cart state
+  dispatch(removeItem({ id: product._id }));
+
+  // Increase stock quantity back in Sanity
+  const updatedProduct = {
+    ...product,
+    stockQuantity: product.stockQuantity + 1, // Increase stock when removed from cart
+  };
+
+  try {
+    // Update the stock back in Sanity
+    await client
+      .patch(product._id)
+      .set({ stockQuantity: updatedProduct.stockQuantity }) // Update stock in Sanity
+      .commit();
+
+    // Optionally refetch and update the product data
+    const updatedProductData = await client.fetch(
+      `*[_type == "product" && _id == $id][0]`,
+      { id: product._id }
+    );
+    setProduct(updatedProductData); // Update local state after removal
+    } catch (error) {
+      console.error(error);
+      alert("There was an error updating the stock. Please try again.");
+    }
+  };
   // Handle quantity change
   const incrementQuantity = () => {
     if(quantity=== product.stockQuantity){
@@ -199,6 +225,13 @@ const addToCartHandler = async (product: Product) => {
               <Button variant={"destructive"} className="ml-4">Buy Now</Button>
             </div>
           </div>
+          {/* <Button
+                    onClick={() => removeFromCartHandler(product._id)}
+                    size={"sm"}
+                    className="bg-green-700 text-white hover:text-green-700"
+                  >
+                    Remove
+                  </Button> */}
         </div>
 
         {/* Related Products Section */}

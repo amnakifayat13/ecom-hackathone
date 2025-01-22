@@ -4,9 +4,15 @@ import { ShoppingCartIcon } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import CartSideBar from "./CartSidebar"; 
+import { useEffect } from "react";
+import { loadCartFromLocalStorage } from "../../../store/cartSlice";
 
 export default function ShoppingCartButton() {
     const dispatch = useDispatch();
+    // Load the cart from localStorage when the component mounts
+      useEffect(() => {
+        dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+      }, [dispatch]);
     const items = useSelector((state: RootState) => state.cart.items);
     
     // Calculate total quantity

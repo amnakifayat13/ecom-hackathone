@@ -2,13 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define the CartItem type
 export type CartItem = {
-  id: string; // Assuming `id` comes as a string from Sanity
+  id: string;
   name: string;
   price: number;
   imageUrl: string;
   quantity: number;
   category: string;
-  
 };
 
 // Initial state type
@@ -42,19 +41,33 @@ const cartSlice = createSlice({
     },
 
     // Action to remove an item from the cart
-    removeItem:(state, action:PayloadAction<{ id: string }>) =>{
-      const existingItem = state.items.find((item)=>item.id===action.payload.id);
-      if(existingItem){
-          if(existingItem.quantity > 1 ){
-              existingItem.quantity -= 1;
-          }else{
-              state.items =state.items.filter((item)=> item.id != action.payload.id)
-          }
+    removeItem: (state, action: PayloadAction<{ id: string }>) => {
+      const existingItem = state.items.find(item => item.id === action.payload.id);
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          // If quantity is greater than 1, decrease it by 1
+          existingItem.quantity -= 1;
+        } else {
+          // If quantity is 1, remove the item from the cart
+          state.items = state.items.filter(item => item.id !== action.payload.id);
+        }
       }
-  },
-  clearCart: (state) =>{
+
+      // Sync the cart to localStorage after modification
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cart', JSON.stringify(state.items));
+      }
+    },
+
+    // Action to clear the entire cart
+    clearCart: (state) => {
       state.items = [];
-  },
+      // Sync the cart to localStorage after clearing
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cart', JSON.stringify(state.items));
+      }
+    },
 
     // Action to update the quantity of an item
     updateQuantity(state, action: PayloadAction<{ id: string; quantity: number }>) {
@@ -99,6 +112,7 @@ export const {
   updateQuantity,
   syncSanityProducts,
   loadCartFromLocalStorage,
+  clearCart,
 } = cartSlice.actions;
 
 // Export the reducer to be used in the store

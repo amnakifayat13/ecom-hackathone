@@ -1,9 +1,10 @@
-import { addItem, CartItem, removeItem } from "../../../store/cartSlice";
+import { addItem, CartItem, loadCartFromLocalStorage, removeItem } from "../../../store/cartSlice";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { SheetClose } from "../ui/sheet";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 type Props = {
   items: CartItem[];
@@ -11,12 +12,16 @@ type Props = {
 
 export default function CartSideBar({ items }: Props) {
   const dispatch = useDispatch();
+  // Load the cart from localStorage when the component mounts
+    useEffect(() => {
+      dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
+    }, [dispatch]);
 
   // Add item to cart
-  // const addCartHandler = (item: CartItem) => dispatch(addItem(item));
+  const addCartHandler = (item: CartItem) => dispatch(addItem(item));
 
   // Remove item from cart
-  const removeCartHandler = (id: string) => dispatch(removeItem({ id }));
+  const removeFromCartHandler = (id: string) => dispatch(removeItem({ id }));
 
   return (
     <div className="mt-6 mb-6 h-full">
@@ -62,20 +67,20 @@ export default function CartSideBar({ items }: Props) {
 
                 <div className="flex items-center space-x-4">
                   <Button
-                    onClick={() => removeCartHandler(item.id)}
+                    onClick={() => removeFromCartHandler(item.id)}
                     size={"sm"}
                     className="bg-green-700 text-white hover:text-green-700"
                   >
                     Remove
                   </Button>
 
-                  {/* <Button
+                  <Button
                     onClick={() => addCartHandler(item)}
                     size={"sm"}
                     className="text-green-700"
                   >
                     Add
-                  </Button> */}
+                  </Button>
                 </div>
               </div>
             </div>

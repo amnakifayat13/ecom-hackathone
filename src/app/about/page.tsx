@@ -13,6 +13,7 @@ export default function About(){
           useEffect(() => {
             dispatch(loadCartFromLocalStorage()); // Dispatch action to load the cart from localStorage
           }, [dispatch]);
+          
         
     return(
         <div className="md:w-[1170px] md:mx-auto">
