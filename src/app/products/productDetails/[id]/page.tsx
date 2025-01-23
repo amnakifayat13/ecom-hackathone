@@ -137,9 +137,9 @@ const addToCartHandler = async (product: Product) => {
   }
 };
 // Remove from Cart Handler
- const removeFromCartHandler = async (product: Product) =>  {
+ const removeFromCartHandler = async (id:string) =>  {
   // Dispatch action to remove item from the Redux cart state
-  dispatch(removeItem({ id: product._id }));
+  dispatch(removeItem({ id }));
 
   // Increase stock quantity back in Sanity
   const updatedProduct = {
@@ -225,13 +225,13 @@ const addToCartHandler = async (product: Product) => {
               <Button variant={"destructive"} className="ml-4">Buy Now</Button>
             </div>
           </div>
-          {/* <Button
+          <Button
                     onClick={() => removeFromCartHandler(product._id)}
                     size={"sm"}
                     className="bg-green-700 text-white hover:text-green-700"
                   >
                     Remove
-                  </Button> */}
+                  </Button>
         </div>
 
         {/* Related Products Section */}
