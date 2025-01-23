@@ -202,6 +202,7 @@ const addToCartHandler = async (product: Product) => {
               </button>
             </div>
           </div>
+         
 
           {/* Product Information */}
           <div className="md:w-1/2 mb-8 md:ml-20 px-6">
@@ -223,15 +224,17 @@ const addToCartHandler = async (product: Product) => {
               </button>
 
               <Button variant={"destructive"} className="ml-4">Buy Now</Button>
+             
             </div>
-          </div>
-          <Button
+            <Button
                     onClick={() => removeFromCartHandler(product._id)}
                     size={"sm"}
-                    className="bg-green-700 text-white hover:text-green-700"
-                  >
-                    Remove
+                    className="bg-green-700 text-white hover:text-green-700 py-6 px-8 mt-6"
+                   >
+                    Remove from cart
                   </Button>
+          </div>
+          
         </div>
 
         {/* Related Products Section */}
