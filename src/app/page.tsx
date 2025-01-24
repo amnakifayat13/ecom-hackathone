@@ -3,19 +3,18 @@ import Section2 from "@/components/Helper/section2";
 import Section3 from "@/components/Helper/section3";
 import Section4 from "@/components/Helper/section4";
 import Section5 from "@/components/Helper/section5";
-import Section6 from "@/components/Helper/section6"
-
-import Image from "next/image";
+import Section6 from "@/components/Helper/section6";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <div className="md:w-[1170px] md:mx-auto">
-    <Section1/>
-    <Section2/>
-    <Section3 />
-    <Section4/>
-    <Section5/>
-    <Section6/>
+      <Suspense fallback={<div>Loding...</div>}><Section1/></Suspense>
+      <Suspense fallback={<div>Loding...</div>}><Section2/></Suspense>
+      <Suspense fallback={<div>Loding...</div>}><Section3/></Suspense>
+      <Suspense fallback={<div>Loding...</div>}><Section4/></Suspense>
+      <Suspense fallback={<div>Loding...</div>}><Section5/></Suspense>
+      <Suspense fallback={<div>Loding...</div>}><Section6/></Suspense>
     </div>
   );
 }

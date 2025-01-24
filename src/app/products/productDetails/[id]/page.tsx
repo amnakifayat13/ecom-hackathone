@@ -144,13 +144,13 @@ const addToCartHandler = async (product: Product) => {
   // Increase stock quantity back in Sanity
   const updatedProduct = {
     ...product,
-    stockQuantity: product.stockQuantity + 1, // Increase stock when removed from cart
+    stockQuantity: product.stockQuantity +1 , // Increase stock when removed from cart
   };
 
   try {
     // Update the stock back in Sanity
     await client
-      .patch(product._id)
+      .patch(id)
       .set({ stockQuantity: updatedProduct.stockQuantity }) // Update stock in Sanity
       .commit();
 

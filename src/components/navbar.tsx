@@ -3,6 +3,7 @@ import Image from "next/image"
 import {  ArrowBigDownDashIcon, HeartIcon, Search, ShoppingCartIcon, User, UserIcon } from "lucide-react"
 import Menu from "./Helper/menu"
 import ShoppingCartButton from "./Helper/ShoppingCartButton"
+import SearchBar from "./Helper/searchbar"
 
 
 export default function Nav(){
@@ -28,10 +29,10 @@ export default function Nav(){
             <div className="flex items-center justify-around w-[95%] md:w-4/5 mx-aotu h-full">
             {/* logo */}
             <Link href="/">
-            <button className="ml-4 md:ml-16 text-xl sm:2xl md:3xl xl:4xl font-bold text-[#252B42]">Bandage</button>
+            <button className="ml-4  text-xl sm:2xl md:3xl xl:4xl font-bold text-[#252B42]">Bandage</button>
             </Link>
             <div>
-                <ul className="  hidden md:flex gap-6 font font-semibold cursor-pointer md:ml-48">
+                <ul className="  hidden md:flex gap-6 font font-semibold cursor-pointer md:ml-8">
                     <li className="text-[#252B42]"><Link href="/">Home</Link></li>
                     <li><Link href="/shop"><div className="lg:basis-1/4 lg:text-center text-right">
                         <select className="text-[#252B42]" name="" id="">
@@ -48,15 +49,15 @@ export default function Nav(){
             </div>
            
            {/* login/register */}
-            <div className="flex md:ml-20 ml- text-[#00b0d7]">
+            <div className="flex md:ml-4 ml- text-[#00b0d7]">
                 <User className="hidden md:block"/>
                 <p className=" mt-1 hidden md:block">Login/Register</p>
             </div>
             {/* icons */}
-            <div className="flex items-center md:space-x-6 space-x-1 "> 
+            <div className="flex items-center md:space-x-6 space-x-1 md:ml-8 "> 
 
-                <Search className="ml-4 text-[#00b0d7] hidden md:block"/>
-                <div className="flex text-[#00b0d7]">
+                <SearchBar/>
+                <div className="flex text-[#00b0d7] md:ml-48">
                     <ShoppingCartButton />
                     </div>
                <div className="flex text-[#00b0d7] ">
