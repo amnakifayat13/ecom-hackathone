@@ -6,7 +6,7 @@ import Section5 from "@/components/Helper/section5";
 import Section6 from "@/components/Helper/section6";
 import { Suspense } from "react";
 
-export default function Home() {
+ export default function Home() {
   return (
     <div className="md:w-[1170px] md:mx-auto">
       <Suspense fallback={<div>Loding...</div>}><Section1/></Suspense>

@@ -74,13 +74,13 @@ export default function CartSideBar({ items }: Props) {
                     Remove
                   </Button>
 
-                  <Button
+                  {/* <Button
                     onClick={() => addCartHandler(item)}
                     size={"sm"}
                     className="text-green-700"
                   >
                     Add
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </div>

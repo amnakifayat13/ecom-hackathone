@@ -112,8 +112,8 @@ export default function Section3() {
         Problems trying to resolve the conflict between
       </p>
 
-      <div>
-        <div className=" md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+      <div data-id="product-list" >
+        <div className=" md:ml-6 md:mr-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20" >
           {products.map((product) => (
             <div key={product._id} className="relative p-4 border rounded-lg shadow-lg bg-white">
               <div className="relative w-full h-60"> 

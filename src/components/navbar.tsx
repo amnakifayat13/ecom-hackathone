@@ -54,9 +54,9 @@ export default function Nav(){
                 <p className=" mt-1 hidden md:block">Login/Register</p>
             </div>
             {/* icons */}
-            <div className="flex items-center md:space-x-6 space-x-1 md:ml-8 "> 
+            <div className="flex items-center md:space-x-6 space-x-1 md:ml-8 text-[#00b0d7] "  > 
 
-                <SearchBar/>
+                <div data-id="open-search-btn"><SearchBar/></div>
                 <div className="flex text-[#00b0d7] md:ml-48">
                     <ShoppingCartButton />
                     </div>

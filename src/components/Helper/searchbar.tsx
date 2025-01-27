@@ -5,6 +5,7 @@ import { SearchIcon } from "lucide-react";
 import { client } from "@/sanity/lib/client";  // Adjust the import for Sanity client
 import { useRouter } from "next/navigation";  // Using next.js router to redirect to product detail page
 import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -70,12 +71,12 @@ export default function SearchBox() {
   }, []);
 
   return (
-    <Dialog>
+    <Dialog >
       <DialogTrigger>
         <SearchIcon size={26} cursor="pointer" />
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent  data-id="open-searchbar">
         <form onSubmit={handleSearchSubmit}>
           <input
             type="text"
@@ -92,7 +93,7 @@ export default function SearchBox() {
             ref={searchRef}
             className="search-results bg-white shadow-xl rounded-lg mt-4 max-h-72 overflow-y-auto"
           >
-            <h3 className="font-semibold text-lg py-3 px-5 border-b">Search Results:</h3>
+            <h3 className="font-semibold text-lg py-3 px-5 border-b">Search Products:</h3>
             <ul className="p-4">
               {searchResults.map((product) => (
                 <li
@@ -100,7 +101,7 @@ export default function SearchBox() {
                   onClick={() => handleProductClick(product._id)}  // Use _id for product navigation
                   className="cursor-pointer hover:bg-gray-100 p-3 flex items-center border-b"
                 >
-                  <img
+                  <Image
                     src={product.productImage?.asset?._ref ? urlFor(product.productImage).url() : '/fallback-image.png'}
                     alt={product.title}
                     className="w-16 h-16 object-cover mr-4 rounded-lg"

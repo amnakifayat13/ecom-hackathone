@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/cart/page.jsx", "src/app/order"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/cart/page.jsx", "src/app/order", "cypress.config.js", "src/app/cart/pageCart.cy.jsx", "src/app/pageHome.cy.jsx", "src/components/Helper/CartSidebarCartSideBar.cy.jsx"],
   "exclude": ["node_modules"]
 }
