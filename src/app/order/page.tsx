@@ -1,9 +1,10 @@
-"use client";
-
+"use client"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Importing useRouter from next/router
 import { Button } from "../../components/ui/button"; // Assuming you have a custom button component
+import {client} from "../../sanity/lib/client"; // Import your Sanity client
 
+// Define the form data structure
 interface OrderFormData {
   fullName: string;
   email: string;
@@ -27,15 +28,16 @@ export default function OrderPage() {
     country: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // For form submission state
-  const [isClient, setIsClient] = useState(false); // For client-side rendering check
-  const router = useRouter(); // Router hook
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
+  const router = useRouter();
 
-  // To ensure the router hook works on the client-side only
+  // Ensure client-side rendering
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -44,24 +46,42 @@ export default function OrderPage() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Send the order data (you can integrate an API here)
-    console.log("Order Data Submitted: ", formData);
+    try {
+      // Create order document in Sanity
+      const createdOrder = await client.create({
+        _type: "order",
+        fullName: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        postalCode: formData.postalCode,
+        country: formData.country,
+      });
 
-    // Optionally dispatch to save the data in a global store (Redux, for example)
-    // dispatch(saveOrderData(formData));
+      console.log("Order data submitted successfully!");
 
-    // Redirect to the confirmation page or order summary
-    setIsSubmitting(false);
-    if (isClient) {
-      router.push("/order-summary"); // Only use router on the client side
+       // Save the orderId to localStorage after the order is created
+    localStorage.setItem("orderId", createdOrder._id);
+
+      // Redirect after successful submission
+      if (isClient) {
+        router.push("/order-summary");
+      }
+    } catch (error) {
+      console.error("Error submitting order data to Sanity: ", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  if (!isClient) return null; // Return null to prevent rendering on the server side
+  if (!isClient) return null;
 
   return (
     <div className="max-w-3xl mx-auto p-6">

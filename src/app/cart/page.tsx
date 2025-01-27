@@ -124,11 +124,11 @@ export default function Cart (){
                                 <span>Total</span>
                                 <span>${totalPriceWithVat}</span>
                             </div>
-                            {/* <Link href="/order"> */}
+                            <Link href="/order">
                             <button className="w-full bg-yellow-600 py-3 px-4 rounded-[20px] text-center text-xl font-bold text-slate-800">
                             CheckOut
                         </button>
-                            {/* </Link> */}
+                            </Link>
                             
                         </div>
                        
