@@ -11,8 +11,8 @@ const ShippingRatesPage = () => {
   // to ship address
   // i added defualt address which help you understand structure of address
   const [shipeToAddress, setshipeToAddress] = useState<Address>({
-    name: "John Doe",
-    phone: "+1 555-678-1234",
+    name: "",
+    phone: "",
     addressLine1: "1600 Pennsylvania Avenue NW",
     addressLine2: "", // Optional
     cityLocality: "Washington",
