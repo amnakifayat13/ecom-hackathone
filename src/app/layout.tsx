@@ -4,7 +4,7 @@ import "./globals.css";
 import Nav from "@/components/navbar";
 import Footer from "@/components/footer";
 import StoreProvider from "../../storeProvider/storeProvider";
-import { Toaster } from "@/components/ui/toaster";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <StoreProvider>
+   
      <html lang="en">
       <body className={inter.className}>
+      <StoreProvider>
         <Nav/>
         {children}
-        <Toaster/>
         <Footer/>
+        </StoreProvider>
         </body>
     </html>
-   </StoreProvider>
+   
   );
 }
