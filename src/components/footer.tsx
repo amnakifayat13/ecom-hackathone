@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link"
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -9,7 +10,9 @@ const Footer = () => {
     <div className="flex justify-between w-[95%] md:w-4/5 mx-aotu h-full">
     {/* logo */}
     <Link href="/">
-    <button className="ml-4 md:ml-24 text-xl sm:2xl md:3xl xl:4xl font-bold text-[#252B42] mt-4">Bandage</button>
+    <button className="ml-4 md:ml-24 -mt-10 ">
+      <Image src="/elogo.png" alt="logo" width={150} height={100}/>
+    </button>
 
     </Link>
     <div className="flex gap-2 text-[#00b0d7] mt-4">

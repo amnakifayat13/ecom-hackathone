@@ -104,6 +104,8 @@ export default function SearchBox() {
                   <Image
                     src={product.productImage?.asset?._ref ? urlFor(product.productImage).url() : '/fallback-image.png'}
                     alt={product.title}
+                    width={200}
+                    height={200}
                     className="w-16 h-16 object-cover mr-4 rounded-lg"
                   />
                   <div>

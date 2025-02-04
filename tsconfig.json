@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/cart/page.jsx", "src/app/order", "cypress.config.js", "src/app/cart/pageCart.cy.jsx", "src/app/pageHome.cy.jsx", "src/components/Helper/CartSidebarCartSideBar.cy.jsx", "src/components/footerFooter.cy.jsx", "src/components/Helper/section6Section6.cy.jsx", "src/components/Helper/ShoppingCartButton.cy.jsx", "src/components/ui/carouselCarousel.cy.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "reducers/cartReducer.js", "reducers/cartAction.js", "src/app/(store)/cart/pagesrc/app/(store)/orderpp/order", "cypress.config.js", "src/app/(store)/cart/pageCart.cy.jsx", "src/app/pageHome.cy.jsx", "src/components/Helper/CartSidebarCartSideBar.cy.jsx", "src/components/footerFooter.cy.jsx", "src/components/Helper/section6Section6.cy.jsx", "src/components/Helper/ShoppingCartButton.cy.jsx", "src/components/ui/carouselCarousel.cy.jsx", "src/components/navbar.jsx", "src/app/(auth)/sign-in/[[...sign-in]]/page.jsx", "src/app/(store)/layout.jsx"],
   "exclude": ["node_modules"]
 }
