@@ -56,6 +56,7 @@ export default function Nav(){
             <div className="flex items-center space-x-6"> 
                 {/* search box */}
                 <SearchBox/>
+                
               
                 <HeartIcon size={26} cursor={"pointer"}/>
                 {/* shopping cart  button */}
@@ -73,30 +74,10 @@ export default function Nav(){
                 </SignedOut>
                
             </div>
-            {/* <ClerkLoaded>
-                {user && (
-                    <Link href="/order"
-                    className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 
-                    bg-blue-500  hover:bg-blue-700 text-white font-bold-py-2 px-4 rounded">
-                        <PackageIcon className="w-6 h-6"/>
-                        <span>My Orders</span>
-                        
-                    </Link>
-                )}
-                 { user ? (
-                    <div className="flex items-center space-x-2">
-                        <UserButton/>
-                       <div className="hidden sm:block text-xs">
-                       <p className="text-gray-400"> Welcome Back</p>
-                       <p className="font-bold">{user.fullname}!</p>
-
-                       </div>
-                    </div>
-                 ):(
-                    <SignInButton mode = "modal"/> 
-
-                 )}
-            </ClerkLoaded> */}
+           
+            <div className="md:hidden ml-2">
+                <Menu/>
+                </div>
             </div>
         </div>
 </div>

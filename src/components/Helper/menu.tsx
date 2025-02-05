@@ -29,27 +29,11 @@ export default function Menu(){
                         </select>
                     </div></Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/about">About</Link></li>
-                    <li className="text-[#252B42] mt-2"><Link href="/">Blog</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/contact">Contact</Link></li>
                     <li className="text-[#252B42] mt-2"><Link href="/team">Team</Link></li>
                 </ul>
-                <div className=" mt-2 md:ml-36 ml- text-[#00b0d7]">
-                <User/>
-                <p className=" mt-1">Login/Register</p>
-            </div>
-            {/* icons */}
-            <div className=" items-center md:space-x-6 space-x-1 "> 
-
-                <Search className="ml-4 text-[#00b0d7]"/>
-                <div className="flex text-[#00b0d7] ">
-                    <ShoppingCartIcon className=" mt-2 ml-2"/>
-                    <p>1</p>
-                    </div>
-               <div className="flex text-[#00b0d7] ">
-               <HeartIcon size={26} cursor={"pointer"} className="mt-2 ml-2"/>
-               <p className=" md:block">1</p>
-               </div>
-               </div>
+                
+           
                 
                
   </DialogContent>
