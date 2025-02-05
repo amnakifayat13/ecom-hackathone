@@ -67,13 +67,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: "0 auto" }}>
-      <h1 className="text-xl md:text-2xl font-semibold mt-10 mb-4 text-green-600">Payment</h1>
+    <div style={{ maxWidth: 400, margin: "0 auto" }} >
+      <h1 className="text-xl md:text-2xl font-semibold mt-10 mb-4 text-green-600 ml-10 md:ml-40">Payment</h1>
       {/* Display Total Amount and VAT Amount */}
       <div className="mb-10">
-        <p className="text-blue-600">Subtotal: ${totalAmount - vatAmount}</p>
-        <p className="text-blue-600">VAT (15%): ${vatAmount}</p>
-        <p className="text-green-600 font-bold">Total: ${totalAmount}</p>
+        <p className="text-blue-600 ml-10 md:ml-40">Subtotal: ${totalAmount - vatAmount}</p>
+        <p className="text-blue-600 ml-10 md:ml-40">VAT (15%): ${vatAmount}</p>
+        <p className="text-green-600 font-bold ml-10 md:ml-40">Total: ${totalAmount}</p>
       </div>
       {/* Wrap the payment form inside the Elements provider with Stripe instance and client secret */}
       <Elements stripe={stripePromise} options={{ clientSecret }}>

@@ -13,7 +13,7 @@ export default function Section1(){
                     <p>but things on a small scale</p>
                     <Button variant={"destructive"} className="mt-6 font-bold bg-green-600">SHOP NOW</Button>
                 </div>
-                <Image src="/frontimg.png" alt="" width={400} height={400}
+                <Image src="/chair.png" alt="" width={400} height={400}
                 className="w-[600px] hidden md:block ml-20"/> 
             
             </div>
