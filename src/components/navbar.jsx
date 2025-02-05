@@ -5,6 +5,7 @@ import Menu from "./Helper/menu"
 import ShoppingCartButton from "./Helper/ShoppingCartButton"
 import SearchBar from "./Helper/searchbar"
 import { ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs"
+import SearchBox from "./Helper/searchbar"
 
 
 export default function Nav(){
@@ -54,6 +55,7 @@ export default function Nav(){
            
             <div className="flex items-center space-x-6"> 
                 {/* search box */}
+                <SearchBox/>
               
                 <HeartIcon size={26} cursor={"pointer"}/>
                 {/* shopping cart  button */}
