@@ -7,6 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+import { checkStockInSanity } from "../stock"
 
 export default function Cart (){
     const dispatch = useDispatch();
@@ -31,9 +32,15 @@ export default function Cart (){
 
    
     //add item
-    const addItemHandler = (item:CartItem) => {
-        dispatch(addItem(item))
-    }
+    const addItemHandler = async (item: CartItem) => {
+        const isInStock = await checkStockInSanity(item.id);
+    
+        if (isInStock) {
+            dispatch(addItem(item));
+        } else {
+            alert("This item is out of stock!");
+        }
+    };
 
     // rempve item
     const removeItemHandler = (id:string) => {
@@ -57,7 +64,7 @@ export default function Cart (){
                     className="object-cover mx-auto"/>
                     <h1 className="mt-8 text-2xl font-semibold">Your Cart is empty</h1>
                     <Link href="/">
-                    <Button className="bg-green-700 text-white hover:text-green-700 mt-4"> Shop Now</Button>
+                    <Button className="bg-green-700 text-white hover:bg-green-600 mt-4"> Shop Now</Button>
                     </Link>
 
                 </div>
@@ -85,9 +92,9 @@ export default function Cart (){
                                                 <h1 className="md:text-2xl text-lg font-bold text-blue-950">${item.price}</h1>
                                                 <h1 className="md:text-lg text-sm font-semibold">Quantity: {item.quantity}</h1>
                                                 <div className="flex items-center mt-4 space-x-2">
-                                                    {/* <Button onClick={()=>{addItemHandler(item)}} className="bg-green-700 text-white hover:text-green-700      "
-                                                    >Add More</Button> */}
-                                                    <Button onClick={() => {removeItemHandler(item.id)}} className="text-green-700"
+                                                    <Button onClick={()=>{addItemHandler(item)}} className="bg-green-700 text-white hover:bg-green-600 px-8 py-6 "
+                                                    >Add More</Button>
+                                                    <Button onClick={() => {removeItemHandler(item.id)}} className="bg-green-700 text-white hover:bg-green-600 px-8 py-6"
                                                     >Remove</Button>
                                                 </div>
                                             </div>
@@ -113,11 +120,7 @@ export default function Cart (){
                                 <span>${vat}</span>
                             </div>
 
-                            {/* <div className="flex mb-6 text-xl uppercase font-semibold text-white items-center
-                            justify-between">
-                                <span>Shipping</span>
-                                <span>Free</span>
-                            </div> */}
+                            
                             <div className="w-full h-[1.2px] bg-white bg-opacity-20"></div>
                             <div className="flex mt-6 mb-6 text-xl uppercase font-semibold text-white items-center
                             justify-between">

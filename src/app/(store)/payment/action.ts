@@ -26,3 +26,4 @@ export async function createPaymentIntent(cartTotal: number) {
     throw error;
   }
 }
+

@@ -15,8 +15,8 @@ export default function ShoppingCartButton() {
       }, [dispatch]);
     const items = useSelector((state: RootState) => state.cart.items);
     
-    // Calculate total quantity
-    const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+    // Ensure items is always an array
+const totalQuantity = (items || []).reduce((total, item) => total + item.quantity, 0);
 
     
     return (

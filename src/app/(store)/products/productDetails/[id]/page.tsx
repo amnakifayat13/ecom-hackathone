@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addItem, loadCartFromLocalStorage, removeItem } from "../../../../../../store/cartSlice";
 import { client } from '../../../../../sanity/lib/client'; 
 import { urlFor } from "@/sanity/lib/image"; 
+import { checkStockInSanity } from "@/app/(store)/stock";
 
 interface CartItem {
   id: string;
@@ -96,7 +97,8 @@ export default function ProductDetail() {
 
   // Add to Cart Handler
 const addToCartHandler = async (product: Product) => {
-  if (product.stockQuantity > 0) {
+  const stockInSanity = await checkStockInSanity(product._id);
+  if (stockInSanity > 0 ){
     const cartItem: CartItem = {
       id: product._id,
       name: product.title,
@@ -109,28 +111,6 @@ const addToCartHandler = async (product: Product) => {
     // Dispatch action to add item to cart
     dispatch(addItem(cartItem));
 
-    // Update stock quantity in Sanity 
-    const updatedProduct = {
-      ...product,
-      stockQuantity: product.stockQuantity - 1, // Decrease stock
-    };
-
-    try {
-      // Update the stock in Sanity
-      await client
-        .patch(product._id)
-        .set({ stockQuantity: updatedProduct.stockQuantity })
-        .commit();
-
-      const updatedProductData = await client.fetch(
-        `*[_type == "product" && _id == $id][0]`,
-        { id: product._id }
-      );
-      setProduct(updatedProductData); // Update product state with new stock quantity
-    } catch (error) {
-      console.error(error);
-      alert("There was an error updating the stock. Please try again.");
-    }
   } else {
     alert("Sorry, this product is out of stock.");
   }
@@ -140,39 +120,17 @@ const addToCartHandler = async (product: Product) => {
   // Dispatch action to remove item from the Redux cart state
   dispatch(removeItem({ id }));
 
-  // Increase stock quantity back in Sanity
-  const updatedProduct = {
-    ...product,
-    stockQuantity: product.stockQuantity +1 , // Increase stock when removed from cart
-  };
-
-  try {
-    // Update the stock back in Sanity
-    await client
-      .patch(id)
-      .set({ stockQuantity: updatedProduct.stockQuantity }) // Update stock in Sanity
-      .commit();
-
-    // Optionally refetch and update the product data
-    const updatedProductData = await client.fetch(
-      `*[_type == "product" && _id == $id][0]`,
-      { id: product._id }
-    );
-    setProduct(updatedProductData); // Update local state after removal
-    } catch (error) {
-      console.error(error);
-      alert("There was an error updating the stock. Please try again.");
-    }
+  
   };
   // Handle quantity change
-  const incrementQuantity = () => {
-    if(quantity=== product.stockQuantity){
-    alert("oops! no item available")}
-    else{
-      setQuantity ((prev) => prev + 1)
-    }
-    };
-  const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  // const incrementQuantity = () => {
+  //   if(quantity=== product.stockQuantity){
+  //   alert("oops! no item available")}
+  //   else{
+  //     setQuantity ((prev) => prev + 1)
+  //   }
+  //   };
+  // const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   return (
     <div className="p-16 min-h-auto md:w-[1170px] md:mx-auto">
@@ -210,7 +168,7 @@ const addToCartHandler = async (product: Product) => {
     </div>
 
     {/* Quantity Selector and Action Buttons */}
-    <div className="flex items-center mt-10 md:ml-12">
+    {/* <div className="flex items-center mt-10 md:ml-12">
       <button
         onClick={decrementQuantity}
         className="w-10 h-10 bg-gray-200 text-gray-700 font-bold shadow-md hover:bg-green-500 hover:text-white transition-colors"
@@ -228,11 +186,12 @@ const addToCartHandler = async (product: Product) => {
       </button>
 
       
-    </div>
+    </div> */}
+    <div className="md:flex md:gap-2 ">
     <Button
       onClick={() => addToCartHandler(product)}
       size="sm"
-      className="bg-yellow-600 text-white hover:text-yellow-500 py-3 px-6 mt-6 rounded-lg md:ml-3 font-bold"
+      className="bg-yellow-600 text-white hover:bg-yellow-700 py-5 px-8 mt-6 rounded-lg  font-bold text-lg"
     >
       Add to Cart
     </Button>
@@ -240,10 +199,11 @@ const addToCartHandler = async (product: Product) => {
     <Button
       onClick={() => removeFromCartHandler(product._id)}
       size="sm"
-      className="bg-yellow-600 text-white hover:text-yellow-500 py-3 px-6 mt-6 rounded-lg md:ml-3 font-bold"
+      className="bg-yellow-600 text-white hover:bg-yellow-700 py-5 px-8 mt-6 rounded-lg md:ml-3 font-bold text-lg"
     >
       Remove from Cart
     </Button>
+    </div>
   </div>
 </div>
 

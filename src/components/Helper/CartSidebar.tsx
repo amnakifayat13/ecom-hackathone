@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SheetClose } from "../ui/sheet";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { checkStockInSanity } from "@/app/(store)/stock";
 
 type Props = {
   items: CartItem[];
@@ -18,7 +19,14 @@ export default function CartSideBar({ items }: Props) {
     }, [dispatch]);
 
   // Add item to cart
-  const addCartHandler = (item: CartItem) => dispatch(addItem(item));
+  const addCartHandler = async (item: CartItem) => {
+    const isAvailable = await checkStockInSanity(item.id);
+    if (isAvailable) {
+      dispatch(addItem(item));
+    } else {
+      alert("Item is out of stock!");
+    }
+  };
 
   // Remove item from cart
   const removeFromCartHandler = (id: string) => dispatch(removeItem({ id }));
@@ -69,18 +77,18 @@ export default function CartSideBar({ items }: Props) {
                   <Button
                     onClick={() => removeFromCartHandler(item.id)}
                     size={"sm"}
-                    className="bg-green-700 text-white hover:text-green-700"
+                    className="bg-yellow-600 text-white hover:bg-yellow-700 px-6 py-4"
                   >
                     Remove
                   </Button>
 
-                  {/* <Button
+                  <Button
                     onClick={() => addCartHandler(item)}
                     size={"sm"}
-                    className="text-green-700"
+                    className="bg-yellow-600 text-white hover:bg-yellow-700 px-6 py-4"
                   >
                     Add
-                  </Button> */}
+                  </Button>
                 </div>
               </div>
             </div>
@@ -88,7 +96,7 @@ export default function CartSideBar({ items }: Props) {
 
           <Link href="/cart">
             <SheetClose>
-              <Button className="mt-6 mb-6 w-full bg-green-700 text-white hover:text-green-700">
+              <Button className="mt-6 mb-6 w-full bg-green-700 text-white hover:bg-green-600">
                 View All Cart
               </Button>
             </SheetClose>

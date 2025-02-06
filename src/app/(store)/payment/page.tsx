@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, loadCartFromLocalStorage } from "../../../../store/cartSlice"; // Assuming you have this action in your cartSlice
+import { clearCart, loadCartFromLocalStorage, updateStockAfterPayment } from "../../../../store/cartSlice"; // Assuming you have this action in your cartSlice
 import { createPaymentIntent } from "./action"; // Update this path as per your setup
 import { useRouter } from "next/navigation";
 
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     // Load cart from localStorage only once when the cart is empty
-    if (!hasLoadedRef.current && cartItems.length === 0) {
+    if (!hasLoadedRef.current && (cartItems || []).length === 0) {
       dispatch(loadCartFromLocalStorage());
       hasLoadedRef.current = true; // Mark as loaded
     }
@@ -77,13 +77,13 @@ export default function CheckoutPage() {
       </div>
       {/* Wrap the payment form inside the Elements provider with Stripe instance and client secret */}
       <Elements stripe={stripePromise} options={{ clientSecret }}>
-        <PaymentForm />
+        <PaymentForm cartItems={cartItems} />
       </Elements>
     </div>
   );
 }
 
-function PaymentForm() {
+function PaymentForm({ cartItems }: { cartItems: any[] }) {
   const stripe = useStripe(); // Hook to access Stripe methods
   const elements = useElements(); // Hook to access Stripe elements
   const dispatch = useDispatch(); // Hook to dispatch Redux actions
@@ -115,8 +115,10 @@ function PaymentForm() {
       // Clear the cart after successful payment
       dispatch(clearCart()); // Dispatch the action to clear the cart in Redux
 
-      // Optionally clear localStorage (handled inside clearCart action)
-      // localStorage.removeItem("cart");
+      // Dispatch the action to update the stock in Sanity after successful payment
+      if (Array.isArray(cartItems) && cartItems.length > 0) {
+        dispatch(updateStockAfterPayment(cartItems)); // Only pass an array to the thunk
+      }
 
       setIsProcessing(false);
 
@@ -140,7 +142,6 @@ function PaymentForm() {
         {/* Display any error messages if they occur */}
         {errorMessage && <div style={{ color: "red", marginTop: 8 }}>{errorMessage}</div>}
       </form>
-      
     </div>
   );
 }
