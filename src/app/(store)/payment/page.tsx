@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, loadCartFromLocalStorage, updateStockAfterPayment } from "../../../../store/cartSlice"; // Assuming you have this action in your cartSlice
 import { createPaymentIntent } from "./action"; // Update this path as per your setup
 import { useRouter } from "next/navigation";
+import { AddDispatch } from "../../../../store/store";
 
 // Initialize Stripe with the public key from environment variables
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
@@ -86,10 +87,11 @@ export default function CheckoutPage() {
 function PaymentForm({ cartItems }: { cartItems: any[] }) {
   const stripe = useStripe(); // Hook to access Stripe methods
   const elements = useElements(); // Hook to access Stripe elements
-  const dispatch = useDispatch(); // Hook to dispatch Redux actions
+  // const dispatch = useDispatch(); // Hook to dispatch Redux actions
   const router = useRouter(); // Hook to navigate programmatically
   const [isProcessing, setIsProcessing] = useState(false); // State to manage loading state while processing
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // State to show error messages
+  const dispatch = useDispatch<AddDispatch>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent page refresh when submitting the form
