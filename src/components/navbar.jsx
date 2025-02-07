@@ -6,6 +6,7 @@ import ShoppingCartButton from "./Helper/ShoppingCartButton"
 import SearchBar from "./Helper/searchbar"
 import { ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import SearchBox from "./Helper/searchbar"
+import WishlistButton from "./Helper/wishlistButton"
 
 
 export default function Nav(){
@@ -58,7 +59,7 @@ export default function Nav(){
                 <SearchBox/>
                 
               
-                <HeartIcon size={26} cursor={"pointer"}/>
+                <WishlistButton/>
                 {/* shopping cart  button */}
                 <ShoppingCartButton/>
                 {/* user button */}
