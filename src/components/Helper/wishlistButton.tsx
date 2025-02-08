@@ -11,23 +11,23 @@ export default function WishlistButton() {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state: RootState) => state.wishlist.wishlistItems);
 
-  // Load wishlist items from localStorage when the component mounts
   useEffect(() => {
-    // Dispatch action to load wishlist from localStorage (if needed)
-  }, [dispatch]);
+    console.log("Wishlist loaded:", wishlistItems);
+  }, [wishlistItems]);
 
-  // Count the total number of items in the wishlist
   const totalWishlistItems = wishlistItems.length;
 
-  // Toggle wishlist functionality for adding/removing items
   const toggleWishlist = (product: any) => {
-    const isWishlisted = wishlistItems.some((item) => item.id === product._id);
+    const isWishlisted = wishlistItems.some((item) => item.id === product.id);
+    console.log("Product ID:", product.id);
+    console.log("Is Wishlisted:", isWishlisted);
+    
     if (isWishlisted) {
-      dispatch(removeFromWishlist({ id: product._id }));
+      dispatch(removeFromWishlist({ id: product.id }));
     } else {
       dispatch(
         addToWishlist({
-          id: product._id,
+          id: product.id,
           name: product.title,
           price: product.price,
           imageUrl: product.productImage ? product.productImage.url() : "/fallback-image.png",
@@ -40,14 +40,10 @@ export default function WishlistButton() {
     <Sheet>
       <SheetTrigger>
         <div className="relative">
-          <span className="absolute -top-3 -right-2 w-6 h-6 bg-red-500 text-center flex items-center justify-center flex-col text-xs text-white rounded-full hover:text-black">
+          <span className="absolute -top-3 -right-2 w-6 h-6 bg-red-500 text-center flex items-center justify-center text-xs text-white rounded-full hover:text-black">
             {totalWishlistItems}
           </span>
-          <Heart
-            size={26}
-            cursor={"pointer"}
-            className="text-gray-500 hover:text-red-500"
-          />
+          <Heart size={26} cursor="pointer" className="text-gray-500 hover:text-red-500" />
         </div>
       </SheetTrigger>
       <SheetContent className="overflow-auto h-full">
@@ -72,7 +68,7 @@ export default function WishlistButton() {
                     </Link>
                   </div>
                   <button
-                    onClick={() => toggleWishlist(item)}
+                    onClick={() => dispatch(removeFromWishlist({ id: item.id }))}
                     className="text-red-500 hover:text-red-700"
                   >
                     Remove
