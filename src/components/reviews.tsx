@@ -1,6 +1,7 @@
 "use client";
+import { Star } from "lucide-react";
 import { useState, FormEvent } from "react";
-import { FaStar } from "react-icons/fa";
+
 
 interface ReviewFormProps {
   productId: string;
@@ -72,7 +73,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
             onClick={() => handleStarClick(star)}
             className={`text-2xl ${formData.rating && formData.rating >= star ? "text-yellow-500" : "text-gray-400"}`}
           >
-            <FaStar />
+            <Star />
           </button>
         ))}
       </div>
