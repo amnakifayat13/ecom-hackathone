@@ -1,5 +1,6 @@
+import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
+
 
 interface ProductReviewsProps {
   productId: string;
@@ -43,7 +44,7 @@ export default function ProductReviews({ productId, newReview }: ProductReviewsP
               <strong>{review.userName}</strong>
               <span className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <FaStar
+                  <Star
                     key={i}
                     className={i < review.rating ? "text-yellow-500" : "text-gray-400"}
                   />
