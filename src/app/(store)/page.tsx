@@ -4,6 +4,7 @@ import Section3 from "@/components/Helper/section3";
 import Section4 from "@/components/Helper/section4";
 import Section5 from "@/components/Helper/section5";
 import Section6 from "@/components/Helper/section6";
+import ReviewForm from "@/components/reviews";
 import { Suspense } from "react";
 
  export default function Home() {
@@ -15,6 +16,7 @@ import { Suspense } from "react";
       <Suspense fallback={<div>Loding...</div>}><Section4/></Suspense>
       <Suspense fallback={<div>Loding...</div>}><Section5/></Suspense>
       <Suspense fallback={<div>Loding...</div>}><Section6/></Suspense>
+     
     </div>
   );
 }

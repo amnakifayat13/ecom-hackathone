@@ -13,6 +13,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { checkStockInSanity } from "@/app/(store)/stock";
 import { Heart } from "lucide-react";
 import { RootState } from "../../../../../../store/store";
+import ReviewForm from "@/components/reviews";
+import ProductReviews from "@/components/productReviews";
 
 interface CartItem {
   id: string;
@@ -45,6 +47,8 @@ export default function ProductDetail() {
   const [flashProducts, setFlashProducts] = useState<Product[]>([]);  // State for flash products
   const [category, setCategory] = useState("Flash");
   const [products, setProducts] = useState<Product[]>([]);
+  const [showReviews, setShowReviews] = useState(false);
+  
 
   const dispatch = useDispatch();
   const router = useParams();
@@ -119,7 +123,27 @@ export default function ProductDetail() {
   // Remove from Cart Handler
   const removeFromCartHandler = async (id: string) => {
     dispatch(removeItem({ id }));
+
+
   };
+
+  // Use localStorage to persist showReviews state
+  useEffect(() => {
+    const savedReviewsState = localStorage.getItem("showReviews");
+    if (savedReviewsState !== null) {
+      setShowReviews(JSON.parse(savedReviewsState));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("showReviews", JSON.stringify(showReviews));
+  }, [showReviews]);
+
+  const toggleReviews = () => {
+    setShowReviews((prev) => !prev);
+  };
+
+  
 
   if (!product) {
     return <p>Product not found.</p>;
@@ -131,26 +155,45 @@ export default function ProductDetail() {
       <div className="flex flex-col md:flex-row text-[#252B42] gap-10 px-4 sm:px-8 lg:px-16 py-10">
         {/* Product Image */}
         <div className="relative flex justify-center md:w-1/2 mb-10 md:mb-0">
-          <Image
+         <div>
+           <Image
             src={product.productImage ? urlFor(product.productImage).url() : "/fallback-image.png"}
             alt={product.title}
             width={400}
             height={400}
             className="w-full md:mt-60 max-w-[350px] sm:max-w-[300px] md:max-w-[500px] h-[430px] object-cover rounded-lg shadow-lg transition-all transform hover:scale-105"
           />
+          <div>
+            {/* Button to Toggle Reviews */}
+          <button
+            onClick={toggleReviews}
+            className="mt-6 bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 md:ml-16"
+          >
+            {showReviews ? "Hide Reviews" : "Show Reviews"}
+          </button>
+
+          {/* Reviews Section - Only Show When Button is Clicked */}
+          {showReviews && (
+            <div className="mt-6">
+              <ReviewForm productId={product._id} />
+              <ProductReviews productId={product._id}  />
+            </div>
+          )}
+          </div>
+         </div>
           <div className="absolute top-2 right-2 z-10 bg-white rounded-full p-1 shadow-md hover:bg-gray-200 transition">
             <button onClick={() => toggleWishlist(product)}>
               <Heart className={`w-6 h-6 mt-2 ${wishlist.some((item) => item.id === product._id) ? "fill-red-500 text-red-500" : "text-gray-500"}`} />
             </button>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+          {/* <div className="absolute bottom-0 left-0 right-0 flex justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
             <button
               onClick={() => addToCartHandler(product)}
               className="bg-black text-white px-6 py-3 text-sm w-full hover:bg-green-600"
             >
               Add to Cart
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Product Information */}
@@ -272,6 +315,10 @@ export default function ProductDetail() {
           )}
         </div>
       </div>
+      
+   
+  
+
     </div>
   );
 }
